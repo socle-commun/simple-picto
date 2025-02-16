@@ -3,7 +3,7 @@ export default function RootPage() {
 		<>
 			<aside></aside>
 
-			<main>
+			<main role="main">
 				<h1>RootPage</h1>
 			</main>
 		</>

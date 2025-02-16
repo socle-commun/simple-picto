@@ -6,8 +6,8 @@ import Logo from "@/components/branding/Logo";
 export default function RootLayout() {
 	return (
 		<>
-			<header>
-				<nav>
+			<header role="banner">
+				<nav role="navigation">
 					<section>
 						<BrandName>
 							<Logo className="size-12" />
