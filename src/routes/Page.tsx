@@ -1,7 +1,11 @@
 export default function RootPage() {
 	return (
 		<>
-			<h1>RootPage</h1>
+			<aside></aside>
+
+			<main>
+				<h1>RootPage</h1>
+			</main>
 		</>
 	)
 }

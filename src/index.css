@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* #region Layout */
+@layer base {
+	:root {
+		@apply bg-zinc-100 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50;
+		@apply font-sans antialiased;
+	}
+
+	html {
+		@apply h-full;
+	}
+
+	body {
+		@apply h-screen;
+		@apply grid grid-cols-[auto_1fr] grid-rows-[auto_1fr];
+		grid-template-areas: "header header" "aside main";
+	}
+
+	#root {
+		@apply contents;
+
+		&>header {
+			@apply h-16 px-4 py-2;
+			@apply flex items-center;
+			@apply bg-zinc-200 dark:bg-zinc-800;
+			grid-area: header;
+
+			&>nav {
+				@apply w-full;
+				@apply flex items-center justify-between;
+
+				&>section {
+					@apply flex items-center gap-4;
+				}
+			}
+		}
+
+		&>aside {
+			grid-area: aside;
+		}
+
+		&>main {
+			@apply overflow-auto;
+			grid-area: main;
+		}
+	}
+}
+
+/* #endregion Layout */
+
+
+/* #region Branding */
+@layer components {
+	.brand {
+		@apply p-2 flex items-center gap-1;
+		@apply font-black text-xl;
+		@apply bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-50% bg-clip-text text-transparent;
+	}
+}
+
+/* #endregion Branding */
