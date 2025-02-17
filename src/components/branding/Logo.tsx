@@ -13,8 +13,8 @@ export default function Logo(props: SVGProps<SVGSVGElement>) {
 		>
 			<defs>
 				<linearGradient id="gradient" x1="0%" x2="50%" y1="0%" y2="50%">
-					<stop offset="0%" stop-color="#FF0066"></stop>
-					<stop offset="100%" stop-color="#BD34FE"></stop>
+					<stop offset="0%" stopColor="#FF0066"></stop>
+					<stop offset="100%" stopColor="#BD34FE"></stop>
 				</linearGradient>
 			</defs>
 			<path fill="url(#gradient)" d="" transform="translate(100 100)">

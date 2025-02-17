@@ -1,26 +1,11 @@
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
 
-import BrandName from "@/components/branding/BrandName";
-import Logo from "@/components/branding/Logo";
+import Navigation from "@/partials/layout/TopBar";
 
 export default function RootLayout() {
 	return (
 		<>
-			<header role="banner">
-				<nav role="navigation">
-					<section>
-						<BrandName>
-							<Logo className="size-12" />
-							<span>SimplePicto</span>
-						</BrandName>
-					</section>
-					<section></section>
-					<section>
-						<NavLink to="/settings">Settings</NavLink>
-					</section>
-				</nav>
-			</header>
-
+			<Navigation />
 			<Outlet />
 		</>
 	)

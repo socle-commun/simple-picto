@@ -1,6 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@font-face {
+	font-family: "Material Symbols Rounded";
+	font-style: normal;
+	font-weight: 400;
+	src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v226/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxc.woff2) format("woff2");
+}
+
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+@theme {
+	--font-sans: "Nunito", sans-serif;
+}
 
 /* #region Layout */
 @layer base {
@@ -22,7 +35,7 @@
 	#root {
 		@apply contents;
 
-		&>header {
+		&>header[role="banner"] {
 			@apply h-16 px-4 py-2;
 			@apply flex items-center;
 			@apply bg-zinc-200 dark:bg-zinc-800;
@@ -51,6 +64,32 @@
 
 /* #endregion Layout */
 
+/* #region Icons */
+@layer components {
+	.icon {
+		font-family: "Material Symbols Rounded";
+		font-weight: normal;
+		font-style: normal;
+		font-size: 24px;
+		line-height: 1;
+		letter-spacing: normal;
+		text-transform: none;
+		display: inline-block;
+		white-space: nowrap;
+		word-wrap: normal;
+		direction: ltr;
+		-webkit-font-feature-settings: "liga";
+		font-feature-settings: "liga";
+		-webkit-font-smoothing: antialiased;
+		font-variation-settings:
+			"FILL" 1,
+			"wght" 400,
+			"GRAD" 0,
+			"opsz" 24;
+	}
+}
+
+/* #endregion Icons */
 
 /* #region Branding */
 @layer components {
@@ -62,3 +101,30 @@
 }
 
 /* #endregion Branding */
+
+/* #region Navigation */
+@layer components {
+	.nav-icon-button {
+		@apply p-2;
+		@apply flex items-center justify-center gap-1;
+		@apply rounded-full;
+		@apply text-zinc-500;
+		@apply hover:text-zinc-800 hover:dark:text-zinc-200;
+		@apply hover:bg-zinc-300 hover:dark:bg-zinc-700;
+		@apply hover:shadow-sm hover:drop-shadow-sm;
+		@apply active:shadow-xs active:drop-shadow-xs;
+		@apply transition-all duration-100 ease-in-out;
+	}
+
+	.nav-icon-button.active {
+		@apply text-zinc-300;
+		@apply shadow-sm drop-shadow-sm;
+		@apply bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-50%;
+		@apply hover:text-zinc-50;
+		@apply hover:shadow-md hover:drop-shadow-md;
+		@apply active:text-zinc-50;
+		@apply active:shadow-xs active:drop-shadow-xs;
+	}
+}
+
+/* #endregion Navigation */

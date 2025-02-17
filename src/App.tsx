@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import AppProviders from "@/components/AppProviders";
+import AppProviders from "@/partials/AppProviders";
 
 import RootLayout from "@/routes/Layout";
 import RootError from "@/routes/Error";
