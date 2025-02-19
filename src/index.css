@@ -1,18 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-
 @import "tailwindcss";
-
-@font-face {
-	font-family: "Material Symbols Rounded";
-	font-style: normal;
-	font-weight: 400;
-	src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v226/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rIelXxc.woff2) format("woff2");
-}
 
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @theme {
-	--font-sans: "Nunito", sans-serif;
+	--font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* #region Layout */
