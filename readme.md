@@ -5,7 +5,7 @@ Simple Picto est une application de classeur de communication visuelle qui perme
 ## Fonctionnalités
 
 - Application multilangues
-- Listes de pictogrammes/images associés à un mot, lisible par text to speech lors de la sélection, et filtrables en fonction de leurs "catégories" respectives.
+- Listes de pictogrammes/images associés à un mot, lisible par text to speech lors de la sélection et filtrables en fonction de leurs "catégories" respectives.
 - Définition des classeur par un formulaire dédié.
 - Définition des pictogrammes/images du classeur par des formulaires dédiés.
 
