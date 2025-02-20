@@ -12,6 +12,6 @@ Simple Picto est une application de classeur de communication visuelle qui perme
 ## TODO
 
 - Formulaire de création d'un classeur et de ses mots, pictogrammes/images.
-- Gestion du theming (light dark ou system mode).
+- Gestion du theming (light, dark ou system mode).
 - Gestion de la langue (changer le locale).
 - Améliorer le responsiveness du design pour les devices en mode portrait.
