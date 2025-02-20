@@ -1,6 +1,11 @@
 export interface Pictogram {
 	id?: number;
+
 	word: string;
-	url: boolean;
+	category: string;
+
+	imageBase64?: string;
+	imageUrl?: string;
+
 	binderId: number;
 }
