@@ -123,7 +123,7 @@
 /* #region Category Button */
 @layer components {
 	.category-button {
-		@apply w-full p-2 my-2 cursor-pointer capitalize rounded-lg shadow-md bg-stone-300 dark:bg-stone-700 hover:shadow-lg hover:scale-105 active:shadow-xl active:scale-110 transition-all ease-in-out duration-150;
+		@apply w-full p-2 my-2 cursor-pointer capitalize rounded-lg shadow-md bg-zinc-300 dark:bg-zinc-700 hover:shadow-lg hover:scale-105 active:shadow-xl active:scale-110 transition-all ease-in-out duration-150;
 	}
 
 	.category-button.active {

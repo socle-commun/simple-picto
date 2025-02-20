@@ -33,7 +33,7 @@ export default function RootPage() {
 
 	function speakWord(word: string) {
 		const wordToSpeak = new SpeechSynthesisUtterance(word);
-		wordToSpeak.lang = i18n.language || "en-US";
+		wordToSpeak.lang = i18n.language || "en";
 		window.speechSynthesis.speak(wordToSpeak);
 	}
 

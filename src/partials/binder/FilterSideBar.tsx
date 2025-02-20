@@ -6,7 +6,7 @@ interface AppProvidersProps {
 
 export default function PictogramGridContainer({ children }: AppProvidersProps) {
 	return (
-		<aside role="complementary" className="w-16 md:w-3xs px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-stone-200 dark:bg-stone-800">
+		<aside role="complementary" className="w-16 md:w-3xs px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800">
 			{children}
 		</aside>
 	)

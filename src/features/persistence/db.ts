@@ -31,7 +31,7 @@ export class SimplePictoDB extends Dexie {
 	}
 
 	public async getcurrentBinderPictograms() {
-		const binderIdSetting = await this.settings.get('current-binder-id');
+		const binderIdSetting = await this.getSetting('current-binder-id');
 		if (binderIdSetting && typeof binderIdSetting.value === 'number') {
 			return this.pictograms.where({ binderId: binderIdSetting.value }).toArray();
 		} else {
