@@ -31,19 +31,19 @@ npm install  # ou yarn install
 - **Lancement de l'application en mode développement:**
 
 ```sh
-npm run dev  # ou yarn install
+npm run dev  # ou yarn dev
 ```
 
 - **Build de l'application:**
 
 ```sh
-npm run build  # ou yarn install
+npm run build  # ou yarn build
 ```
 
 - **Preview de l'application buildé:**
 
 ```sh
-npm run preview  # ou yarn install
+npm run preview  # ou yarn preview
 ```
 
 ## Technologies utilisées
