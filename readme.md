@@ -15,32 +15,32 @@ Simple Picto est une application de classeur de communication visuelle 📖 qui 
 
 ## 🚀 Installation
 
-1. **Clone du repo**
+- **Clone du repo:**
 
 ```sh
 git clone https://github.com/socle-commun/simple-picto.git
 cd simple-picto
 ```
 
-1. **Installation des dépendances**
+- **Installation des dépendances:**
 
 ```sh
 npm install  # ou yarn install
 ```
 
-1. **Lancement de l'application en mode développement**
+- **Lancement de l'application en mode développement:**
 
 ```sh
 npm run dev  # ou yarn install
 ```
 
-1. **Build de l'application**
+- **Build de l'application:**
 
 ```sh
 npm run build  # ou yarn install
 ```
 
-1. **Preview de l'application buildé**
+- **Preview de l'application buildé:**
 
 ```sh
 npm run preview  # ou yarn install
