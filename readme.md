@@ -13,6 +13,48 @@ Simple Picto est une application de classeur de communication visuelle 📖 qui 
 - 🎨 **Design responsive** pour un affichage agréable sur smartphones, tablettes et ordinateurs
 - 🆓 **Gratuit et Open Source** (license à définir)
 
+## 🚀 Installation
+
+1. **Clone du repo**
+
+```sh
+git clone https://github.com/socle-commun/simple-picto.git
+cd simple-picto
+```
+
+1. **Installation des dépendances**
+
+```sh
+npm install  # ou yarn install
+```
+
+1. **Lancement de l'application en mode développement**
+
+```sh
+npm run dev  # ou yarn install
+```
+
+1. **Build de l'application**
+
+```sh
+npm run build  # ou yarn install
+```
+
+1. **Preview de l'application buildé**
+
+```sh
+npm run preview  # ou yarn install
+```
+
+## Technologies utilisées
+
+- [Vite](https://vite.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://react.dev/)
+- [Dexie](https://dexie.org/)
+- [I18next](https://www.i18next.com/)
+- [React Router](https://reactrouter.com/)
+
 ## 🛠️ TODO
 
 ### ⚙️ Settings
