@@ -57,9 +57,9 @@ export default function RootPage() {
 					<button
 						key={item.id}
 						onClick={() => speakWord(item.word)}
-						className="flex flex-col bg-stone-200 dark:bg-stone-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:bg-stone-200 hover:dark:bg-stone-800 hover:scale-105 active:shadow-xl active:scale-110 transition-all ease-in-out duration-150" >
+						className="flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:bg-zinc-200 hover:dark:bg-zinc-800 hover:scale-105 active:shadow-xl active:scale-110 transition-all ease-in-out duration-150" >
 						<img src={item.imageUrl ? item.imageUrl : item.imageBase64} alt={item.word} className="aspect-square size-full" />
-						<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-stone-300 dark:border-stone-700">{item.word}</p>
+						<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-zinc-300 dark:border-zinc-700">{item.word}</p>
 					</button>
 				))}
 			</PictogramGridContainer>
