@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +11,7 @@ import PictogramGridContainer from "@/partials/binder/PictogramGridContainer";
 import FilterSideBar from "@/partials/binder/FilterSideBar";
 
 export default function RootPage() {
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
@@ -20,9 +20,7 @@ export default function RootPage() {
 		[db]
 	);
 
-	if (!pictograms) return null;
-
-	const categories = Array.from(new Set(pictograms.map(item => item.category)));
+	const categories = Array.from(new Set((pictograms ?? []).map(item => item.category)));
 
 	function toggleCategory(category: string) {
 		if (activeCategories.includes(category)) {
@@ -31,6 +29,10 @@ export default function RootPage() {
 			setActiveCategories((prev) => [...prev, category]);
 		}
 	}
+
+	useEffect(() => {
+		document.title = t("pages.titles.home");
+	}, [t])
 
 	return (
 		<>
@@ -46,7 +48,7 @@ export default function RootPage() {
 			</FilterSideBar>
 
 			<PictogramGridContainer>
-				{pictograms.filter((value) => {
+				{pictograms && pictograms.filter((value) => {
 					return activeCategories.includes(value.category) || activeCategories.length === 0;
 				}).map(item => (
 					<button

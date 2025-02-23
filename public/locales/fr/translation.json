@@ -1,1 +1,15 @@
-{}
+{
+	"pages": {
+		"titles": {
+			"home": "Accueil",
+			"about": "À propos",
+			"contact": "Contact",
+			"settings": "Paramètres"
+		}
+	},
+	"navigation": {
+		"settings": "Paramètres",
+		"about": "À propos",
+		"contact": "Contact"
+	}
+}
