@@ -1,14 +1,14 @@
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
 import "@/features/i18n";
 
-import App from "@/App.tsx"
+import App from "@/App.tsx";
 
-import "@/style/index.css"
+import "@/style/index.css";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<App />
 	</StrictMode>,
-)
+);

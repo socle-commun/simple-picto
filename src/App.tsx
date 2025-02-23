@@ -3,7 +3,10 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
+import toggleDarkClass from "@/features/theming/toggleDarkClass";
+import colorModeStorageListener from "@/features/theming/colorModeStorageListener";
 
 import AppProviders from "@/partials/AppProviders";
 
@@ -13,9 +16,6 @@ import RootPage from "@/routes/Page";
 
 import SettingsLayout from "@/routes/settings/Layout";
 import SettingsPage from "@/routes/settings/Page";
-
-import toggleDarkClass from "@/features/theming/toggleDarkClass";
-import colorModeStorageListener from "@/features/theming/colorModeStorageListener";
 
 function App() {
 	useEffect(() => {
@@ -50,6 +50,6 @@ function App() {
 			</BrowserRouter>
 		</AppProviders>
 	)
-}
+};
 
 export default App
