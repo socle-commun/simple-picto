@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import AppProviders from "@/partials/AppProviders";
@@ -9,7 +11,19 @@ import RootPage from "@/routes/Page";
 import SettingsLayout from "@/routes/settings/Layout";
 import SettingsPage from "@/routes/settings/Page";
 
+import toggleDarkClass from "@/features/theming/toggleDarkClass";
+import colorModeStorageListener from "@/features/theming/colorModeStorageListener";
+
 function App() {
+	useEffect(() => {
+		toggleDarkClass();
+
+		window.addEventListener("storage", colorModeStorageListener);
+		return () => {
+			window.removeEventListener("storage", colorModeStorageListener);
+		};
+	}, []);
+
 	return (
 		<AppProviders>
 			<BrowserRouter>

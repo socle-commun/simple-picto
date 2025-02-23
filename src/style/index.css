@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @import "./theme/index.css";
 
@@ -36,8 +36,8 @@
 /* #endregion Icons */
 
 @layer components {
-	a[aria-current="page"] {
-		@apply font-bold bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-75% bg-clip-text text-transparent;
+	header nav a[aria-current="page"] {
+		@apply bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-75% bg-clip-text text-transparent;
 	}
 }
 
