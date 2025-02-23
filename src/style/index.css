@@ -4,52 +4,9 @@
 
 @import "./theme/index.css";
 
-/* #region Layout */
-@layer base {
-	:root {
-		@apply bg-zinc-100 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50;
-		@apply font-sans antialiased;
-	}
+@import "./base/index.css";
 
-	html {
-		@apply h-full;
-	}
-
-	body {
-		@apply h-screen;
-		@apply grid grid-rows-[auto_1fr] grid-cols-[auto_1fr];
-		grid-template-areas: "header header" "aside main";
-		@apply overflow-hidden;
-	}
-
-	#root {
-		@apply contents;
-
-		&>header {
-			grid-area: header;
-			@apply h-16 px-4 py-2;
-			@apply flex items-center;
-			@apply bg-zinc-200 dark:bg-zinc-800;
-
-			&>nav {
-				@apply w-full;
-				@apply flex items-center justify-end;
-			}
-		}
-
-		&>aside {
-			grid-area: aside;
-			@apply overflow-auto;
-		}
-
-		&>main {
-			grid-area: main;
-			@apply overflow-auto;
-		}
-	}
-}
-
-/* #endregion Layout */
+@import "./layout/index.css";
 
 /* #region Icons */
 @layer components {
@@ -78,43 +35,11 @@
 
 /* #endregion Icons */
 
-/* #region Branding */
 @layer components {
-	.brand {
-		@apply p-2 flex items-center gap-1;
-		@apply font-black text-xl;
-		@apply bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-75% bg-clip-text text-transparent;
+	a[aria-current="page"] {
+		@apply font-bold bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-75% bg-clip-text text-transparent;
 	}
 }
-
-/* #endregion Branding */
-
-/* #region Navigation */
-@layer components {
-	.nav-icon-button {
-		@apply p-2;
-		@apply flex items-center justify-center gap-1;
-		@apply rounded-full;
-		@apply text-zinc-500;
-		@apply hover:text-zinc-800 hover:dark:text-zinc-200;
-		@apply hover:bg-zinc-300 hover:dark:bg-zinc-700;
-		@apply hover:shadow-sm hover:drop-shadow-sm;
-		@apply active:shadow-xs active:drop-shadow-xs;
-		@apply transition-all duration-100 ease-in-out;
-	}
-
-	.nav-icon-button.active {
-		@apply text-zinc-300;
-		@apply shadow-sm drop-shadow-sm;
-		@apply bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-50%;
-		@apply hover:text-zinc-50;
-		@apply hover:shadow-md hover:drop-shadow-md;
-		@apply active:text-zinc-50;
-		@apply active:shadow-xs active:drop-shadow-xs;
-	}
-}
-
-/* #endregion Navigation */
 
 /* #region Category Button */
 @layer components {

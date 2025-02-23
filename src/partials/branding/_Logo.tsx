@@ -17,7 +17,7 @@ export default function Logo(props: SVGProps<SVGSVGElement>) {
 					<stop offset="100%" stopColor="#BD34FE"></stop>
 				</linearGradient>
 			</defs>
-			<path fill="url(#gradient)" d="" transform="translate(100 100)">
+			<path fill="url(#gradient)" transform="translate(100 100)">
 				<animate
 					attributeName="d"
 					values="M60.1,-50.6C72.7,-32.1,74.2,-7.4,66,9.7C57.9,26.8,40,36.3,23,42.5C6,48.7,-10.1,51.5,-26.1,46.6C-42.2,41.8,-58.2,29.4,-61.5,14.2C-64.8,-0.9,-55.4,-18.8,-43,-37.3C-30.6,-55.8,-15.3,-74.9,4.2,-78.2C23.7,-81.6,47.4,-69.2,60.1,-50.6Z;

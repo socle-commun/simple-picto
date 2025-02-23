@@ -1,0 +1,26 @@
+@layer base {
+	body {
+		@apply grid grid-rows-[auto_1fr] grid-cols-[auto_1fr];
+		grid-template-areas: "header header" "aside main";
+		@apply overflow-hidden;
+	}
+
+	#root {
+		&>header {
+			grid-area: header;
+			@apply md:h-16 px-4 py-2;
+			@apply flex flex-col md:flex-row;
+			@apply bg-zinc-200 dark:bg-zinc-800;
+		}
+
+		&>aside {
+			grid-area: aside;
+			@apply overflow-auto;
+		}
+
+		&>main {
+			grid-area: main;
+			@apply overflow-auto;
+		}
+	}
+}

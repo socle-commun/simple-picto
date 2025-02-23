@@ -1,13 +1,30 @@
+import { useState } from "react";
+
 import { Outlet } from "react-router";
 
-// import TopBar from "@/partials/layout/TopBar";
-import Nav from "@/components/nav/Nav";
+import ResponsiveTopBar from "@/components/nav/ResponsiveTopBar";
+
+import Brand from "@/partials/branding/Brand";
+import TopBarNavLink from "@/components/nav/TopBarNavLink";
 
 export default function RootLayout() {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleOpen = () => setIsOpen(!isOpen);
+
 	return (
 		<>
-			{/* <TopBar /> */}
-			<Nav />
+			<ResponsiveTopBar
+				isOpen={isOpen}
+				onClick={toggleOpen}
+				brand={<Brand />}>
+				<TopBarNavLink to="/settings">
+					<span className="icon">settings</span>
+					<span>Settings</span>
+				</TopBarNavLink>
+			</ResponsiveTopBar>
+
+
 			<Outlet />
 		</>
 	)
