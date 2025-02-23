@@ -55,7 +55,6 @@ export default function RootPage() {
 		}
 	}
 
-
 	return (
 		<>
 			<FilterSideBar>
