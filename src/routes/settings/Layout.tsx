@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router";
 
 import SideNav from "@/partials/settings/SideNav";
 
-export default function RootLayout() {
+export default function SettingsLayout() {
 	return (
 		<>
 			<SideNav>

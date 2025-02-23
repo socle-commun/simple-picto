@@ -12,7 +12,7 @@ export class SimplePictoDB extends Dexie {
 	constructor() {
 		super('SimplePictoDB');
 		this.version(1).stores({
-			settings: 'key',
+			settings: '&key',
 			binders: '++id',
 			pictograms: '++id, binderId'
 		});

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "@/features/persistence/db";
+import speak from "@/features/tts/speak";
 
 import PictogramGridContainer from "@/partials/binder/PictogramGridContainer";
 import FilterSideBar from "@/partials/binder/FilterSideBar";
@@ -31,12 +32,6 @@ export default function RootPage() {
 		}
 	}
 
-	function speakWord(word: string) {
-		const wordToSpeak = new SpeechSynthesisUtterance(word);
-		wordToSpeak.lang = i18n.language || "en";
-		window.speechSynthesis.speak(wordToSpeak);
-	}
-
 	return (
 		<>
 			<FilterSideBar>
@@ -56,7 +51,7 @@ export default function RootPage() {
 				}).map(item => (
 					<button
 						key={item.id}
-						onClick={() => speakWord(item.word)}
+						onClick={() => speak(item.word, i18n.language)}
 						className="flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:bg-zinc-200 hover:dark:bg-zinc-800 hover:scale-105 active:shadow-xl active:scale-110 transition-all ease-in-out duration-150" >
 						<img src={item.imageUrl ? item.imageUrl : item.imageBase64} alt={item.word} className="aspect-square size-full" />
 						<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-zinc-300 dark:border-zinc-700">{item.word}</p>
