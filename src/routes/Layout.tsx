@@ -1,11 +1,13 @@
 import { Outlet } from "react-router";
 
-import TopBar from "@/partials/layout/TopBar";
+// import TopBar from "@/partials/layout/TopBar";
+import Nav from "@/components/nav/Nav";
 
 export default function RootLayout() {
 	return (
 		<>
-			<TopBar />
+			{/* <TopBar /> */}
+			<Nav />
 			<Outlet />
 		</>
 	)
