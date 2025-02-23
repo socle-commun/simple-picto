@@ -2,6 +2,9 @@ import { useEffect } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router";
 
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from '@vercel/speed-insights/react';
+
 import AppProviders from "@/partials/AppProviders";
 
 import RootLayout from "@/routes/Layout";
@@ -26,6 +29,11 @@ function App() {
 
 	return (
 		<AppProviders>
+			{/* Vercel tooling */}
+			<Analytics />
+			<SpeedInsights />
+
+			{/* App */}
 			<BrowserRouter>
 				<Routes>
 
