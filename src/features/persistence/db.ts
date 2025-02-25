@@ -22,7 +22,7 @@ export class SimplePictoDB extends Dexie {
 			categories: "++id",
 			pictograms: "++id, binderId, categoryId",
 			settings: "&key",
-			translations: "&[objectType+language+objectId]",
+			translations: "&[objectType+objectId+language]",
 		});
 	}
 

@@ -62,7 +62,7 @@ export default function RootPage() {
 					<button
 						key={category.id}
 						onClick={() => category.id !== undefined && toggleCategory(category.id)}
-						className={cn("category-button", category.id !== undefined && activeCategories.includes(category.id) ? " active" : "")}>
+						className={cn("w-full p-2 my-2 cursor-pointer capitalize rounded-lg shadow-md bg-zinc-300 dark:bg-zinc-700 hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150", category.id !== undefined && activeCategories.includes(category.id) ? "bg-sky-500" : "")}>
 						<span className="icon"></span>
 						<span>
 							{categoriesTranslations?.filter((translation) => {
@@ -80,7 +80,7 @@ export default function RootPage() {
 					<button
 						key={item.id}
 						onClick={() => speak(item.word, i18n.language)}
-						className="flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:bg-zinc-200 hover:dark:bg-zinc-800 hover:scale-105 active:shadow-xl active:scale-95 transition-all ease-in-out duration-150" >
+						className={cn("flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:bg-zinc-200 hover:dark:bg-zinc-800 hover:scale-105 active:shadow-xl active:scale-95 transition-all ease-in-out duration-150")} >
 						<img src={item.imageUrl ? item.imageUrl : item.imageBase64} alt={item.word} className="aspect-square size-full" />
 						<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-zinc-300 dark:border-zinc-700">{item.word}</p>
 					</button>
