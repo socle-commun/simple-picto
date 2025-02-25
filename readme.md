@@ -61,6 +61,7 @@ npm run preview  # ou yarn preview
 
 - 🎭 **Gestion du theming** (mode clair ☀️, sombre 🌙 ou système 🔄) ✅
 - 🌐 **Gestion de la langue** (changer la langue de l'application) ✅
+- 💾 **Réinitialisation de la base de données**
 - 📂 **Gestion du classeur actif**
 - 📚 **Liste des classeurs disponibles**
 - ✏️ **Formulaire de création et édition** d'un classeur et de ses mots, pictogrammes ou images
