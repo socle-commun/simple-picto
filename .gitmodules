@@ -1,0 +1,3 @@
+[submodule "simple-picto-lib"]
+	path = ext/simple-picto-lib
+	url = https://github.com/socle-commun/simple-picto-lib

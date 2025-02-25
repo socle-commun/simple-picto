@@ -1,10 +1,10 @@
 import Dexie, { Table } from "dexie";
 
-import { Binder } from "@/features/persistence/entities/Binder";
-import { Category } from "@/features/persistence/entities/Category";
-import { Pictogram } from "@/features/persistence/entities/Pictogram";
-import { CURRENT_BINDER_ID, Setting } from "@/features/persistence/entities/Setting";
-import { Translation } from "@/features/persistence/entities/Translation";
+import { Binder } from "simple-picto-lib/entities/binder";
+import { Category } from "simple-picto-lib/entities/category";
+import { Pictogram } from "simple-picto-lib/entities/pictogram";
+import { CURRENT_BINDER_ID, Setting } from "simple-picto-lib/entities/setting";
+import { Translation } from "simple-picto-lib/entities/translation";
 
 import { populate } from "@/features/persistence/populate";
 
