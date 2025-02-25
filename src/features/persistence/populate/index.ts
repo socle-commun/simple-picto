@@ -3,6 +3,7 @@ import { populateCategory } from "./_category";
 import { populatePictogram } from "./_pictogram";
 
 export async function populate() {
+	// #region Default binder
 	const defaultBinderId = await populateDefaultBinder([
 		{
 			language: "fr",
@@ -13,7 +14,9 @@ export async function populate() {
 			value: "Default binder"
 		}
 	]);
+	// #endregion Default binder
 
+	// #region Categories
 	const generalCategoryId = await populateCategory([
 		{
 			language: "fr",
@@ -57,7 +60,9 @@ export async function populate() {
 			value: "Places"
 		}
 	], "apartment");
+	// #endregion Categories
 
+	// #region Pictograms
 	await populatePictogram(defaultBinderId, generalCategoryId, [
 		{
 			language: "fr",
@@ -130,7 +135,7 @@ export async function populate() {
 			language: "en",
 			value: "Lavatory"
 		}
-	]);
+	], "https://images.unsplash.com/photo-1589824783837-6169889fa20f?w=400");
 	await populatePictogram(defaultBinderId, placesCategoryId, [
 		{
 			language: "fr",
@@ -140,7 +145,7 @@ export async function populate() {
 			language: "en",
 			value: "Kitchen"
 		}
-	]);
+	], "https://plus.unsplash.com/premium_photo-1680382578857-c331ead9ed51?w=400");
 	await populatePictogram(defaultBinderId, placesCategoryId, [
 		{
 			language: "fr",
@@ -150,7 +155,7 @@ export async function populate() {
 			language: "en",
 			value: "Bedroom"
 		}
-	]);
+	], "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400");
 	await populatePictogram(defaultBinderId, placesCategoryId, [
 		{
 			language: "fr",
@@ -160,7 +165,8 @@ export async function populate() {
 			language: "en",
 			value: "Bathroom"
 		}
-	]);
+	], "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400");
+	// #endregion Pictograms
 
 	// await db.pictograms.bulkAdd([
 	// 	{
