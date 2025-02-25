@@ -2,9 +2,10 @@ import { type ReactNode, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { cn } from "@/utilities/cn";
 import LocaleSelector from "@/features/i18n/LocaleSelector";
 import ColorModeToggle from "@/features/theming/ColorModeToggle";
+
+import { cn } from "@/utilities/cn";
 
 function SettingCard({ children }: { children: ReactNode }) {
 	return (

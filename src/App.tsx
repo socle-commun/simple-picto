@@ -1,7 +1,11 @@
+import { useEffect } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react";
+
+import toggleDarkClass from "@/features/theming/toggleDarkClass";
 
 import AppProviders from "@/partials/AppProviders";
 
@@ -13,6 +17,10 @@ import SettingsLayout from "@/routes/settings/Layout";
 import SettingsPage from "@/routes/settings/Page";
 
 function App() {
+	useEffect(() => {
+		toggleDarkClass();
+	}, []);
+
 	return (
 		<AppProviders>
 			{/* Vercel tooling */}
