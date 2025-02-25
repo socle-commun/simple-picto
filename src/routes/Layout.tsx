@@ -8,6 +8,8 @@ import TopBarNavLink from "@/components/nav/TopBarNavLink";
 
 import Brand from "@/partials/branding/Brand";
 
+import { cn } from "@/utilities/cn";
+
 export default function RootLayout() {
 	const { t } = useTranslation();
 
@@ -22,7 +24,7 @@ export default function RootLayout() {
 				onClick={toggleOpen}
 				brand={<Brand />}>
 				<TopBarNavLink to="/settings">
-					<span className="icon">settings</span>
+					<span className={cn("icon")}>settings</span>
 					<span>{t("navigation.settings")}</span>
 				</TopBarNavLink>
 			</ResponsiveTopBar>

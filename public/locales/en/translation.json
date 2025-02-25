@@ -5,6 +5,10 @@
 			"about": "About",
 			"contact": "Contact",
 			"settings": "Settings"
+		},
+		"settings": {
+			"language": "Language",
+			"colorMode": "Color mode"
 		}
 	},
 	"navigation": {
