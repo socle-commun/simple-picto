@@ -1,28 +1,14 @@
-import { Link, Outlet } from "react-router";
+import { Outlet } from "react-router";
 
-import SideNav from "@/partials/settings/SideNav";
+import { cn } from "@/utilities/cn";
 
 export default function SettingsLayout() {
 	return (
 		<>
-			<SideNav>
-				<nav>
-					<ul className="flex flex-col gap-2">
-						<li>
-							<Link to="profile">Profile</Link>
-						</li>
-						<li>
-							<Link to="account">Account</Link>
-						</li>
-						<li>
-							<Link to="notifications">Notifications</Link>
-						</li>
-					</ul>
-				</nav>
-			</SideNav>
-
-			<main>
-				<Outlet />
+			<main role="main" className={cn("p-4 sm:p-6 lg:p-8")}>
+				<div className={cn("flex flex-col gap-4")}>
+					<Outlet />
+				</div>
 			</main>
 		</>
 	)
