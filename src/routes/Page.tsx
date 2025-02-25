@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "@/features/persistence/db";
+import { Translation } from "@/features/persistence/entities/Translation";
 import speak from "@/features/tts/speak";
 
 import PictogramGridContainer from "@/partials/binder/PictogramGridContainer";
 import FilterSideBar from "@/partials/binder/FilterSideBar";
 
 import { cn } from "@/utilities/cn";
-import { Translation } from "@/features/persistence/entities/Translation";
 
 export default function RootPage() {
 	const { t, i18n } = useTranslation();

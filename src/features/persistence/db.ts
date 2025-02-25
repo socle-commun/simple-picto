@@ -40,8 +40,7 @@ export class SimplePictoDB extends Dexie {
 	}
 
 	public getCategoriesFromPictograms(pictograms: Pictogram[]) {
-		const categoryIds = pictograms.map((pictogram) => pictogram.categoryId);
-		return this.categories.where("id").anyOf(categoryIds).toArray();
+		return this.categories.where("id").anyOf(pictograms.map((pictogram) => pictogram.categoryId)).toArray();
 	}
 
 	public getCategory(id: number) {
