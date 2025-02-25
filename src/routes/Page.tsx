@@ -8,9 +8,6 @@ import { db } from "@/features/persistence/db";
 import { Translation } from "@/features/persistence/entities/Translation";
 import speak from "@/features/tts/speak";
 
-import PictogramGridContainer from "@/partials/binder/PictogramGridContainer";
-import FilterSideBar from "@/partials/binder/FilterSideBar";
-
 import { cn } from "@/utilities/cn";
 
 export default function RootPage() {
@@ -72,7 +69,7 @@ export default function RootPage() {
 
 	return (
 		<>
-			<FilterSideBar>
+			<aside role="complementary" className={cn("w-16 md:w-3xs px-2 sm:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
 				{categories && categories.map(category => (
 					<button
 						key={category.id}
@@ -86,23 +83,25 @@ export default function RootPage() {
 						</span>
 					</button>
 				))}
-			</FilterSideBar>
+			</aside>
 
-			<PictogramGridContainer>
-				{pictograms && pictograms.filter((pictogram) => {
-					return (activeCategories.includes(pictogram.categoryId)) || activeCategories.length === 0;
-				}).map((pictogram) => {
-					return { ...pictogram, word: pictogramsTranslations.find((translation) => translation.objectId === pictogram.id)?.value || "" };
-				}).map(item => (
-					<button
-						key={item.id}
-						onClick={() => speak(item.word, i18n.language)}
-						className={cn("flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:scale-105 active:shadow-xl active:scale-95 transition-all ease-in-out duration-150")} >
-						{item.blob && <img src={URL.createObjectURL(item.blob)} alt={item.word} className="aspect-square size-full" />}
-						<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-zinc-300 dark:border-zinc-700">{item.word}</p>
-					</button>
-				))}
-			</PictogramGridContainer>
+			<main role="main" className="p-4 sm:p-6 lg:p-8">
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4">
+					{pictograms && pictograms.filter((pictogram) => {
+						return (activeCategories.includes(pictogram.categoryId)) || activeCategories.length === 0;
+					}).map((pictogram) => {
+						return { ...pictogram, word: pictogramsTranslations.find((translation) => translation.objectId === pictogram.id)?.value || "" };
+					}).map(item => (
+						<button
+							key={item.id}
+							onClick={() => speak(item.word, i18n.language)}
+							className={cn("flex flex-col bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg cursor-pointer shadow-md hover:shadow-lg hover:scale-105 active:shadow-xl active:scale-95 transition-all ease-in-out duration-150")} >
+							{item.blob && <img src={URL.createObjectURL(item.blob)} alt={item.word} className="aspect-square size-full" />}
+							<p className="w-full p-2 font-semibold text-center capitalize border-t-1 border-zinc-300 dark:border-zinc-700">{item.word}</p>
+						</button>
+					))}
+				</div>
+			</main>
 		</>
 	)
 }
