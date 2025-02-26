@@ -69,12 +69,12 @@ export default function RootPage() {
 
 	return (
 		<>
-			<aside role="complementary" className={cn("w-16 md:w-3xs px-2 sm:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
+			<aside role="complementary" className={cn("w-16 md:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
 				{categories && categories.map(category => (
 					<button
 						key={category.id}
 						onClick={() => category.id !== undefined && toggleCategory(category.id)}
-						className={cn("w-full p-2 my-2 flex items-center justify-center gap-2 cursor-pointer capitalize rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150", category.id !== undefined && activeCategories.includes(category.id) ? "bg-sky-500" : "bg-zinc-300 dark:bg-zinc-700 ")}>
+						className={cn("w-full p-2 my-2 flex items-center justify-center gap-2 cursor-pointer capitalize rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150", category.id !== undefined && activeCategories.includes(category.id) ? "bg-sky-400 dark:bg-sky-600" : "bg-zinc-300 dark:bg-zinc-700 ")}>
 						<span className={cn("icon")}>{category.icon}</span>
 						<span className={cn("hidden md:block")}>
 							{categoriesTranslations?.filter((translation) => {

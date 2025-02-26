@@ -5,14 +5,15 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  (props: SelectProps, ref: React.ForwardedRef<HTMLSelectElement>) => {
-    const _props: SelectProps = {
-      className: cn(props.className)
-    };
-    return (
-      <select ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, ...rest }: SelectProps, ref: React.ForwardedRef<HTMLSelectElement>) => {
+		const _props: SelectProps = {
+			className: cn(className),
+			...rest
+		};
+		return (
+			<select ref={ref} className={cn(_props.className)} {...rest} />
+		);
+	}
 );
 
 export default Select;
