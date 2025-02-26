@@ -1,17 +1,21 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type OptionHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface OptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
+export interface OptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
+	children?: ReactNode;
+	className?: string;
 }
 
 const Option = forwardRef<HTMLOptionElement, OptionProps>(
-	({ className, ...rest }: OptionProps, ref: React.ForwardedRef<HTMLOptionElement>) => {
+	({ className, children, ...rest }: OptionProps, ref: ForwardedRef<HTMLOptionElement>) => {
 		const _props: OptionProps = {
 			className: cn(className),
-			...rest
+			children
 		};
 		return (
-			<option ref={ref} className={cn(_props.className)} {...rest} />
+			<option ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</option>
 		);
 	}
 );

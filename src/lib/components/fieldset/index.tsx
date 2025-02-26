@@ -1,18 +1,23 @@
-import React, { forwardRef } from "react";
+import { type FieldsetHTMLAttributes, type ForwardedRef, forwardRef, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface FieldsetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
+export interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+	children?: ReactNode;
+	className?: string;
 }
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
-  (props: FieldsetProps, ref: React.ForwardedRef<HTMLFieldSetElement>) => {
-    const _props: FieldsetProps = {
-      className: cn(props.className)
-    };
-    return (
-      <fieldset ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, children, ...rest }: FieldsetProps, ref: ForwardedRef<HTMLFieldSetElement>) => {
+		const _props: FieldsetProps = {
+			className: cn(className),
+			children: children
+		};
+		return (
+			<fieldset ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</fieldset>
+		);
+	}
 );
 
 export default Fieldset;

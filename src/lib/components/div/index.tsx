@@ -1,18 +1,23 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DivProps extends HTMLAttributes<HTMLDivElement> {
+	children?: ReactNode;
+	className?: string;
 }
 
 const Div = forwardRef<HTMLDivElement, DivProps>(
-  (props: DivProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    const _props: DivProps = {
-      className: cn(props.className)
-    };
-    return (
-      <div ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, children, ...rest }: DivProps, ref: ForwardedRef<HTMLDivElement>) => {
+		const _props: DivProps = {
+			className: cn(className),
+			children: children
+		};
+		return (
+			<div ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</div>
+		);
+	}
 );
 
 export default Div;

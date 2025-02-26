@@ -1,18 +1,19 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type TextareaHTMLAttributes } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+	className?: string;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (props: TextareaProps, ref: React.ForwardedRef<HTMLTextAreaElement>) => {
-    const _props: TextareaProps = {
-      className: cn(props.className)
-    };
-    return (
-      <textarea ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, ...rest }: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
+		const _props: TextareaProps = {
+			className: cn(className)
+		};
+		return (
+			<textarea ref={ref} className={cn(_props.className)} {...rest} />
+		);
+	}
 );
 
 export default Textarea;
