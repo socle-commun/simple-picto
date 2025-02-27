@@ -7,7 +7,7 @@ export default function Brand() {
 	return (
 		<RootLink>
 			<Logo className={cn("size-12")} />
-			<span className={cn("hidden md:block")}>SimplePicto</span>
+			<span>SimplePicto</span>
 		</RootLink>
 	)
 }

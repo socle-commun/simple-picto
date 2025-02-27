@@ -1,18 +1,23 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface AsideProps extends React.HTMLAttributes<HTMLElement> {
+export interface AsideProps extends HTMLAttributes<HTMLElement> {
+	children?: ReactNode;
+	className?: string;
 }
 
 const Aside = forwardRef<HTMLElement, AsideProps>(
-  (props: AsideProps, ref: React.ForwardedRef<HTMLElement>) => {
-    const _props: AsideProps = {
-      className: cn(props.className)
-    };
-    return (
-      <aside ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, children, ...rest }: AsideProps, ref: ForwardedRef<HTMLElement>) => {
+		const _props: AsideProps = {
+			className: cn(className),
+			children: children
+		};
+		return (
+			<aside ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</aside>
+		);
+	}
 );
 
 export default Aside;

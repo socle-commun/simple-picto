@@ -1,18 +1,23 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface SpanProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface SpanProps extends HTMLAttributes<HTMLSpanElement> {
+	className?: string;
+	children?: ReactNode;
 }
 
 const Span = forwardRef<HTMLSpanElement, SpanProps>(
-  (props: SpanProps, ref: React.ForwardedRef<HTMLSpanElement>) => {
-    const _props: SpanProps = {
-      className: cn(props.className)
-    };
-    return (
-      <span ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, children, ...rest }: SpanProps, ref: ForwardedRef<HTMLSpanElement>) => {
+		const _props: SpanProps = {
+			className: cn(className),
+			children: children
+		};
+		return (
+			<span ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</span>
+		);
+	}
 );
 
 export default Span;

@@ -1,18 +1,23 @@
-import React, { forwardRef } from "react";
+import { type ForwardedRef, forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utilities/cn";
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+export interface HeaderProps extends HTMLAttributes<HTMLElement> {
+	children?: ReactNode;
+	className?: string;
 }
 
 const Header = forwardRef<HTMLElement, HeaderProps>(
-  (props: HeaderProps, ref: React.ForwardedRef<HTMLElement>) => {
-    const _props: HeaderProps = {
-      className: cn(props.className)
-    };
-    return (
-      <header ref={ref} className={cn(_props.className)} />
-    );
-  }
+	({ className, children, ...rest }: HeaderProps, ref: ForwardedRef<HTMLElement>) => {
+		const _props: HeaderProps = {
+			className: cn(className),
+			children: children
+		};
+		return (
+			<header ref={ref} className={cn(_props.className)} {...rest}>
+				{_props.children}
+			</header>
+		);
+	}
 );
 
 export default Header;

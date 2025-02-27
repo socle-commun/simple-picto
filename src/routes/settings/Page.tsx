@@ -9,7 +9,7 @@ import { cn } from "@/utilities/cn";
 
 function SettingCard({ children }: { children: ReactNode }) {
 	return (
-		<div className={cn("flex flex-col p-2 gap-2 bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg shadow-md hover:shadow-lg")}>
+		<div className={cn("flex flex-col p-2 gap-2 bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all ease-in-out duration-150")}>
 			{children}
 		</div>
 	);

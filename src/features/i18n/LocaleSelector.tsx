@@ -25,7 +25,7 @@ export default function LocaleSelector() {
 			<select
 				name="locale-selector"
 				id="locale-selector"
-				className={cn("w-min flex mx-auto mt-auto p-2 border-2 border-zinc-400 dark:border-zinc-600 rounded-lg")}
+				className={cn("w-min flex mx-auto mt-auto px-4 py-2 border-2 border-zinc-400 dark:border-zinc-600 rounded-lg")}
 				value={locale}
 				onChange={(event: ChangeEvent<HTMLSelectElement>) => {
 					setLocale(event.target.value as string);
@@ -34,7 +34,6 @@ export default function LocaleSelector() {
 				{i18n.languages.map((language) => (
 					<option key={language} value={language} className={cn("bg-zinc-200 dark:bg-zinc-800")}>
 						{/* <img src={"/locales/" + language + "/icon.svg"} alt={locales[language]} /> */}
-						{/* <span>{locales[language]}</span> */}
 						{locales[language]}
 					</option>
 				))}
