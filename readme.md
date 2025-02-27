@@ -70,8 +70,7 @@ npm run preview  # ou yarn preview
 
 - 📏 **Améliorer le design responsive**
   - 📱 Définir l'UI mobile pour le filtrage par catégories ✅
-  - 📜 Créer un menu responsive pour la navigation principale et secondaire
+  - 📜 Créer un menu responsive pour la navigation principale
     - 🏠 **Navigation principale** : accueil & paramètres ✅
-    - ⚙️ **Navigation secondaire** : uniquement pour les paramètres
 - 🖼️ **Améliorer le classeur par défaut** ⇨ à voir éventuellement avec un professionnel
 - 🌎 **Traduire le classeur par défaut** pour respecter la langue choisie ✅

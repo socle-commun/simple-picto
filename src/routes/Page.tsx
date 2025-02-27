@@ -8,6 +8,9 @@ import { db } from "@/features/persistence/db";
 import { Translation } from "@/features/persistence/entities/Translation";
 import speak from "@/features/tts/speak";
 
+import Aside from "@/lib/components/aside";
+import Main from "@/lib/components/main";
+
 import { cn } from "@/utilities/cn";
 
 export default function RootPage() {
@@ -69,7 +72,7 @@ export default function RootPage() {
 
 	return (
 		<>
-			<aside role="complementary" className={cn("w-16 md:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
+			<Aside role="complementary" className={cn("w-16 md:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
 				{categories && categories.map(category => (
 					<button
 						key={category.id}
@@ -83,9 +86,9 @@ export default function RootPage() {
 						</span>
 					</button>
 				))}
-			</aside>
+			</Aside>
 
-			<main role="main" className="p-4 sm:p-6 lg:p-8">
+			<Main role="main" className="p-4 sm:p-6 lg:p-8">
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4">
 					{pictograms && pictograms.filter((pictogram) => {
 						return (activeCategories.includes(pictogram.categoryId)) || activeCategories.length === 0;
@@ -101,7 +104,7 @@ export default function RootPage() {
 						</button>
 					))}
 				</div>
-			</main>
+			</Main>
 		</>
 	)
 }
