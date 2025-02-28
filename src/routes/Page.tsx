@@ -37,7 +37,6 @@ export default function RootPage() {
 		if (pictograms) {
 			for (const pictogram of pictograms) {
 				db.getTranslationByUuidAndLanguage(pictogram.uuid, i18n.language, "word").then((translation) => {
-					console.log("Category: %s, translation: %o", pictogram.uuid, translation);
 					if (translation) {
 						setPictogramsTranslations((prev) => [...prev, translation]);
 					}
@@ -51,7 +50,6 @@ export default function RootPage() {
 		if (categories) {
 			for (const category of categories) {
 				db.getTranslationByUuidAndLanguage(category.uuid, i18n.language, "name").then((translation) => {
-					console.log("Category: %s, translation: %o", category.uuid, translation);
 					if (translation) {
 						setCategoriesTranslations((prev) => [...prev, translation]);
 					}
