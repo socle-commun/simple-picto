@@ -26,3 +26,21 @@ export async function populateDefaultBinder(translations: ElementTranslation[]) 
 
 	return defaultBinderUuid;
 }
+
+export async function populateBinder(translations: ElementTranslation[]) {
+	const binderUuid = await db.createBinder({
+		uuid: crypto.randomUUID(),
+		author: "SimplePicto"
+	});
+
+	translations.forEach(async (translation) => {
+		await db.createTranslation({
+			objectUuid: binderUuid,
+			language: translation.language,
+			key: translation.key,
+			value: translation.value
+		});
+	});
+
+	return binderUuid;
+}

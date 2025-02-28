@@ -26,10 +26,10 @@ export default function LocaleSelector() {
 	return (
 		<>
 			<label htmlFor="locale-selector" className={cn("text-2xl text-center")}>{t("pages.settings.language")}</label>
-			<Select.Root id="locale-selector" value={locale} onValueChange={(value) => {
+			<Select.Root value={locale} onValueChange={(value) => {
 				setLocale(value);
 			}}>
-				<Select.Trigger className={cn("h-10 min-w-36 mt-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
+				<Select.Trigger id="locale-selector" className={cn("h-10 min-w-36 mt-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
 					<Select.Value placeholder={t("pages.settings.language")} />
 					<Select.Icon className={cn("icon")}>
 						keyboard_arrow_down

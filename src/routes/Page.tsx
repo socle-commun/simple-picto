@@ -77,7 +77,7 @@ export default function RootPage() {
 					<button
 						key={category.uuid}
 						onClick={() => toggleCategory(category.uuid)}
-						className={cn("w-full p-2 my-2 flex items-center justify-center gap-2 cursor-pointer capitalize rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150", activeCategories.includes(category.uuid) ? "bg-sky-400 dark:bg-sky-600" : "bg-zinc-300 dark:bg-zinc-700 ")}>
+						className={cn("w-full p-2 my-2 flex items-center justify-center gap-2 cursor-pointer capitalize rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150", activeCategories.includes(category.uuid) ? "bg-sky-500 text-sky-50" : "bg-zinc-300 dark:bg-zinc-700 ")}>
 						<span className={cn("icon")}>{category.icon}</span>
 						<span className={cn("hidden md:block")}>
 							{category.name}

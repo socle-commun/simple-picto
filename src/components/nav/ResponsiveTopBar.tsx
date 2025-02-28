@@ -9,15 +9,14 @@ import Span from "@/lib/components/span";
 import { cn } from "@/utilities/cn";
 
 interface ResponsiveTopBarProps {
-	isOpen: boolean;
-	onClick: () => void;
 	brand: ReactNode;
 	children: ReactNode;
+	isOpen: boolean;
+	onClick: () => void;
 }
 
-export default function ResponsiveTopBar({ isOpen, onClick, brand, children }: ResponsiveTopBarProps) {
+export default function ResponsiveTopBar({ brand, children, isOpen, onClick }: ResponsiveTopBarProps) {
 	return (
-
 		<Header role="banner">
 			<Nav className={cn("w-full")}>
 				<Div className={cn("flex flex-col md:items-center md:flex-row md:justify-between")}>

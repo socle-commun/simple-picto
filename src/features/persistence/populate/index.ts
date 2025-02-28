@@ -1,4 +1,4 @@
-import { populateDefaultBinder } from "./_binder";
+import { populateBinder, populateDefaultBinder } from "./_binder";
 import { populateCategory } from "./_category";
 import { populatePictogram } from "./_pictogram";
 
@@ -24,6 +24,29 @@ export async function populate() {
 			language: "en-US",
 			key: "description",
 			value: "A general default binder"
+		}
+	]);
+
+	await populateBinder([
+		{
+			language: "fr-FR",
+			key: "title",
+			value: "Classeur vide"
+		},
+		{
+			language: "en-US",
+			key: "title",
+			value: "Empty binder"
+		},
+		{
+			language: "fr-FR",
+			key: "description",
+			value: "Un classeur vide"
+		},
+		{
+			language: "en-US",
+			key: "description",
+			value: "An empty binder"
 		}
 	]);
 	// #endregion Default binder
