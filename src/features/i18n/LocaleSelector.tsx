@@ -9,8 +9,8 @@ import { cn } from "@/utilities/cn";
 const locales: {
 	[key: string]: string;
 } = {
-	"en": "English (USA)",
-	"fr": "Français (France)",
+	"en-US": "English (USA)",
+	"fr-FR": "Français (France)",
 }
 
 export default function LocaleSelector() {
@@ -19,15 +19,15 @@ export default function LocaleSelector() {
 	const [locale, setLocale] = useState<string>(i18n.resolvedLanguage || "en");
 
 	useEffect(() => {
+		i18n.changeLanguage(locale);
 		document.documentElement.setAttribute("lang", locale as string);
-	}, [locale]);
+	}, [locale, i18n]);
 
 	return (
 		<>
 			<label htmlFor="locale-selector" className={cn("text-2xl text-center")}>{t("pages.settings.language")}</label>
 			<Select.Root id="locale-selector" value={locale} onValueChange={(value) => {
 				setLocale(value);
-				i18n.changeLanguage(value);
 			}}>
 				<Select.Trigger className={cn("h-10 min-w-36 mt-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
 					<Select.Value placeholder={t("pages.settings.language")} />

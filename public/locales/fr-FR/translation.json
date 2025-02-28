@@ -8,7 +8,8 @@
 		},
 		"settings": {
 			"language": "Langue",
-			"colorMode": "Mode de couleur"
+			"colorMode": "Mode de couleur",
+			"activeBinder": "Classeur actif"
 		}
 	},
 	"navigation": {

@@ -2,23 +2,27 @@ import { db } from "@/features/persistence/db";
 
 import { type ElementTranslation } from "@/features/persistence/populate/_interfaces";
 
-import { CURRENT_BINDER_ID } from "@/features/persistence/entities/Setting";
+import { ACTIVE_BINDER_ID } from "@/features/persistence/entities/Setting";
 
 export async function populateDefaultBinder(translations: ElementTranslation[]) {
-	const defaultBinderId = await db.addBinder({});
+	const defaultBinderUuid = await db.createBinder({
+		uuid: crypto.randomUUID(),
+		author: "SimplePicto"
+	});
+
 	translations.forEach(async (translation) => {
-		await db.addTranslation({
-			objectType: "Binder",
-			objectId: defaultBinderId,
+		await db.createTranslation({
+			objectUuid: defaultBinderUuid,
 			language: translation.language,
+			key: translation.key,
 			value: translation.value
 		});
 	});
 
-	db.addSetting({
-		key: CURRENT_BINDER_ID,
-		value: defaultBinderId
+	db.createSetting({
+		key: ACTIVE_BINDER_ID,
+		value: defaultBinderUuid
 	});
 
-	return defaultBinderId;
+	return defaultBinderUuid;
 }

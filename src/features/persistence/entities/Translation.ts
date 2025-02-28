@@ -1,7 +1,10 @@
 export interface Translation {
-	objectType: "Binder" | "Category" | "Pictogram";
-	objectId: number;
+	id?: number;
+
+	objectUuid: string;
 	language: string;
+
+	key: string | undefined;
 
 	value: string;
 }
