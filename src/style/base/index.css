@@ -13,6 +13,6 @@
 	}
 
 	#root {
-		@apply contents;
+		@apply contents isolate;
 	}
 }

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
+import { Toggle } from '@base-ui-components/react/toggle';
+import { ToggleGroup } from '@base-ui-components/react/toggle-group';
+
 import toggleDarkClass from "@/features/theming/toggleDarkClass";
 
 import { cn } from "@/utilities/cn";
@@ -25,11 +28,41 @@ export default function ColorModeToggle() {
 	return (
 		<>
 			<label htmlFor="color-mode-toggle" className={cn("text-2xl text-center")}>{t("pages.settings.colorMode")}</label>
-			<div role="group" id="color-mode-toggle" className={cn("w-min flex mx-auto mt-auto border-2 border-zinc-400 dark:border-zinc-600 rounded-lg overflow-hidden")}>
-				<button onClick={() => setColorMode("light")} className={cn("icon p-2 cursor-pointer", colorMode === "light" ? "bg-sky-500 text-sky-50" : "")}>light_mode</button>
-				<button onClick={() => setColorMode("system")} className={cn("icon p-2 cursor-pointer", colorMode === "system" ? "bg-sky-500 text-sky-50" : "")}>devices</button>
-				<button onClick={() => setColorMode("dark")} className={cn("icon p-2 cursor-pointer", colorMode === "dark" ? "bg-sky-500 text-sky-50" : "")}>dark_mode</button>
-			</div>
+			<ToggleGroup
+				id="color-mode-toggle"
+				aria-label="Color mode"
+				value={[colorMode]}
+				onValueChange={(value) => setColorMode(value[0] as "light" | "dark" | "system" ? value[0] as "light" | "dark" | "system" : "system")}
+				className={cn("w-min mx-auto mt-auto flex items-center justify-around rounded-md border")}
+			>
+				{
+					Array.from([
+						{
+							value: "light",
+							aria: "Light mode",
+							icon: "light_mode"
+						},
+						{
+							value: "system",
+							aria: "System mode",
+							icon: "devices"
+						},
+						{
+							value: "dark",
+							aria: "Dark mode",
+							icon: "dark_mode"
+						}]).map((mode) => (
+							<Toggle
+								key={mode.value}
+								aria-label={mode.aria}
+								value={mode.value}
+								className="flex size-8 items-center justify-center select-none first:rounded-l-sm last:rounded-r-sm hover:text-zinc-950 hover:dark:text-zinc-50 hover:bg-zinc-300 hover:dark:bg-zinc-700 active:bg-sky-500 data-[pressed]:text-sky-50 data-[pressed]:bg-sky-500"
+							>
+								<span className="icon">{mode.icon}</span>
+							</Toggle>
+						))
+				}
+			</ToggleGroup>
 		</>
 	);
 }

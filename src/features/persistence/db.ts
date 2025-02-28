@@ -3,15 +3,15 @@ import Dexie, { Table } from "dexie";
 import { Binder } from "@/features/persistence/entities/Binder";
 import { Category } from "@/features/persistence/entities/Category";
 import { Pictogram } from "@/features/persistence/entities/Pictogram";
-import { CURRENT_BINDER_ID, Setting } from "@/features/persistence/entities/Setting";
+import { ACTIVE_BINDER_ID, Setting } from "@/features/persistence/entities/Setting";
 import { Translation } from "@/features/persistence/entities/Translation";
 
 import { populate } from "@/features/persistence/populate";
 
 export class SimplePictoDB extends Dexie {
-	binders!: Table<Binder, number>;
-	categories!: Table<Category, number>;
-	pictograms!: Table<Pictogram, number>;
+	binders!: Table<Binder, string>;
+	categories!: Table<Category, string>;
+	pictograms!: Table<Pictogram, string>;
 	settings!: Table<Setting, string>;
 	translations!: Table<Translation, number>;
 
@@ -24,125 +24,139 @@ export class SimplePictoDB extends Dexie {
 			settings: "&key",
 			translations: "&[objectType+objectId+language]",
 		});
+		this.version(2).stores({
+			binders: "&uuid",
+			categories: "&uuid",
+			pictograms: "&uuid, binderUuid, categoryUuid",
+			translations: "++id, &[objectUuid+language+key]",
+		});
 	}
 
-	// #region get methods
+	// #region List
 	public getBinders() {
 		return this.binders.toArray();
-	}
-
-	public getBinder(id: number) {
-		return this.binders.get(id);
 	}
 
 	public getCategories() {
 		return this.categories.toArray();
 	}
 
+	public getPictograms() {
+		return this.pictograms.toArray();
+	}
+
+	public getSettings() {
+		return this.settings.toArray();
+	}
+
+	public getTranslations() {
+		return this.translations.toArray();
+	}
+	// #endregion
+
+	// #region Get
+	public getBinder(uuid: string) {
+		return this.binders.get(uuid);
+	}
+
+	public getCategory(uuid: string) {
+		return this.categories.get(uuid);
+	}
+
+	public getPictogram(uuid: string) {
+		return this.pictograms.get(uuid);
+	}
+
+	public getSetting(key: string) {
+		return this.settings.get(key);
+	}
+
+	public getTranslation(id: number) {
+		return this.translations.get(id);
+	}
+	// #endregion
+
+	//#region Specific
 	public getCategoriesFromPictograms(pictograms: Pictogram[]) {
-		return this.categories.where("id").anyOf(pictograms.map((pictogram) => pictogram.categoryId)).toArray();
+		return this.categories.where("uuid").anyOf(pictograms.map((pictogram) => pictogram.categoryUuid)).toArray();
 	}
 
-	public getCategory(id: number) {
-		return this.categories.get(id);
+	public getPictogramsFromBinderUuid(binderUuid: string) {
+		return this.pictograms.where({ binderUuid }).toArray();
 	}
 
-	public getPictograms(binderId: number) {
-		return this.pictograms.where({ binderId }).toArray();
-	}
-
-	public async getCurrentBinderPictograms() {
-		const binderIdSetting = await this.getCurrentBinderId();
-		if (binderIdSetting && typeof binderIdSetting.value === "number") {
-			return this.pictograms.where({ binderId: binderIdSetting.value }).toArray();
+	public async getActiveBinderPictograms() {
+		const binderIdSetting = await this.getCurrentBinderUuid();
+		if (binderIdSetting && typeof binderIdSetting.value === "string") {
+			return this.getPictogramsFromBinderUuid(binderIdSetting.value);
 		} else {
 			return Promise.reject(new Error("No current binder ID"));
 		}
 	}
 
-	public async getSetting(key: string) {
-		return this.settings.get(key);
+	public async getCurrentBinderUuid() {
+		return this.getSetting(ACTIVE_BINDER_ID);
 	}
 
-	public async getCurrentBinderId() {
-		return this.getSetting(CURRENT_BINDER_ID);
+	public async getTranslationByUuidAndLanguage(objectUuid: string, language: string, key: string) {
+		return this.translations.get({ objectUuid, language, key });
 	}
+	//#endregion
 
-	public async getTranslation(language: string, objectType: "Binder" | "Category" | "Pictogram", objectId: number) {
-		return this.translations.get({ language, objectType, objectId });
-	}
-	// #endregion get methods
-
-	// #region add methods
-	public addBinder(binder: Binder) {
+	// #region Create
+	public createBinder(binder: Binder) {
 		return this.binders.add(binder);
 	}
 
-	public addCategory(category: Category) {
+	public createCategory(category: Category) {
 		return this.categories.add(category);
 	}
 
-	public addPictogram(pictogram: Pictogram) {
+	public createPictogram(pictogram: Pictogram) {
 		return this.pictograms.add(pictogram);
 	}
 
-	public addSetting(setting: Setting) {
+	public createSetting(setting: Setting) {
 		return this.settings.add(setting);
 	}
 
-	public addTranslation(translation: Translation) {
+	public createTranslation(translation: Translation) {
 		return this.translations.add(translation);
 	}
-	// #endregion add methods
+	// #endregion
 
 
-	// #region update methods
+	// #region Update
 	public updateSetting(setting: Setting) {
-		if (setting.key !== undefined) {
-			return this.settings.update(setting.key, setting);
-		} else {
-			return Promise.reject(new Error("Binder ID is undefined"));
-		}
+		return this.settings.update(setting.key, setting);
 	}
 
 	public updateBinder(binder: Binder) {
-		if (binder.id !== undefined) {
-			return this.binders.update(binder.id, binder);
-		} else {
-			return Promise.reject(new Error("Binder ID is undefined"));
-		}
+		return this.binders.update(binder.uuid, binder);
 	}
 
 	public updatePictogram(pictogram: Pictogram) {
-		if (pictogram.id !== undefined) {
-			return this.pictograms.update(pictogram.id, pictogram);
-		} else {
-			return Promise.reject(new Error("Pictogram ID is undefined"));
-		}
+		return this.pictograms.update(pictogram.uuid, pictogram);
 	}
-	// #endregion update methods
+	// #endregion
 
 
-	// #region delete methods
+	// #region Delete
 	public deleteSetting(key: string) {
-		return this.transaction("rw", this.settings, () => {
-			this.settings.delete(key);
-		});
+		this.settings.delete(key);
 	}
 
-	public deleteBinder(id: number) {
+	public deleteBinder(uuid: string) {
 		return this.transaction("rw", this.pictograms, this.binders, () => {
-			this.pictograms.where({ binderId: id }).delete();
-			this.binders.delete(id);
+			this.pictograms.where({ binderId: uuid }).delete();
+			this.binders.delete(uuid);
 		});
 	}
 
-	public deletePictogram(id: number) {
-		return this.transaction("rw", this.pictograms, () => {
-			this.pictograms.delete(id);
-		});
+	public deletePictogram(uuid: string) {
+		this.pictograms.delete(uuid);
 	}
-	// #endregion delete methods
+	// #endregion
 }
 
 export const db = new SimplePictoDB();

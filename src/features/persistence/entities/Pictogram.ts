@@ -1,8 +1,8 @@
 export interface Pictogram {
-	id?: number;
+	uuid: string;
 
 	blob?: Blob;
 
-	binderId: number;
-	categoryId: number;
+	binderUuid: string;
+	categoryUuid: string;
 }

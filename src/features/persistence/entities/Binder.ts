@@ -1,3 +1,5 @@
 export interface Binder {
-	id?: number;
+	uuid: string;
+
+	author: string;
 }

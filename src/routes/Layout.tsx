@@ -23,7 +23,7 @@ export default function RootLayout() {
 				isOpen={isOpen}
 				onClick={toggleOpen}
 				brand={<Brand />}>
-				<TopBarNavLink to="/settings">
+				<TopBarNavLink to="/settings" onClick={toggleOpen}>
 					<span className={cn("icon")}>settings</span>
 					<span>{t("navigation.settings")}</span>
 				</TopBarNavLink>
