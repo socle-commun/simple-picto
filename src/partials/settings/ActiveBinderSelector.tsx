@@ -7,7 +7,6 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { Select } from "@base-ui-components/react/select";
 
 import { db } from "@/features/persistence/db";
-import { Translation } from "@/features/persistence/entities/Translation";
 
 import { cn } from "@/utilities/cn";
 
@@ -20,27 +19,9 @@ export default function ActiveBinderSelector() {
 	);
 
 	const binders = useLiveQuery(
-		async () => db.getBinders(),
-		[db]
+		async () => db.getTranslatedBinders(),
+		[db, i18n]
 	);
-
-	const [bindersTranslations, setBindersTranslations] = useState<Translation[]>([]);
-	useEffect(() => {
-		if (binders) {
-			for (const binder of binders) {
-				db.getTranslationByUuidAndLanguage(binder.uuid, i18n.language, "title").then((translation) => {
-					if (translation) {
-						setBindersTranslations((prev) => [...prev, translation]);
-					}
-				});
-				db.getTranslationByUuidAndLanguage(binder.uuid, i18n.language, "description").then((translation) => {
-					if (translation) {
-						setBindersTranslations((prev) => [...prev, translation]);
-					}
-				});
-			}
-		}
-	}, [binders, i18n, i18n.language]);
 
 	const [activeBinderUuid, setActiveBinderUuid] = useState<string>("");
 	useEffect(() => {
@@ -67,18 +48,13 @@ export default function ActiveBinderSelector() {
 				<Select.Portal>
 					<Select.Positioner side="bottom" align="start">
 						<Select.Popup className={cn("py-1 rounded-md bg-zinc-200 dark:bg-zinc-800 shadow-lg outline transition-all")}>
-							{binders && binders.map((binder) => {
-								return { ...binder, title: bindersTranslations.find((translation) => translation.objectUuid === binder.uuid && translation.key === "title")?.value || "" };
-							}).map((binder) => {
-								return { ...binder, description: bindersTranslations.find((translation) => translation.objectUuid === binder.uuid && translation.key === "description")?.value || "" };
-							}).map((binder) => (
+							{binders && binders.map((binder) => (
 								<Select.Item key={binder.uuid} value={binder.uuid} className={cn("grid min-w-full cursor-default grid-cols-[0.75rem_1fr] items-center gap-4 py-2 pr-4 pl-2.5 outline-none select-none hover:text-sky-50 hover:bg-sky-500")}>
 									<Select.ItemIndicator className={cn("col-start-1 icon")}>
 										check
 									</Select.ItemIndicator>
 									<Select.ItemText className={cn("col-start-2 flex items-center gap-2")}>
-										<span>{binder.title}</span>
-										<span className={cn("hidden md:block")}>({binder.description})</span>
+										{binder.title}
 									</Select.ItemText>
 								</Select.Item>
 							))}
