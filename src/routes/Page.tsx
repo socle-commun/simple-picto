@@ -23,7 +23,7 @@ export default function RootPage() {
 	}, [t]);
 
 	const pictograms = useLiveQuery(
-		async () => db.getActiveBinderPictograms(),
+		async () => db.getActiveBinderTranslatedPictograms(),
 		[db], []
 	);
 
@@ -32,18 +32,18 @@ export default function RootPage() {
 		[db, pictograms], []
 	);
 
-	const [pictogramsTranslations, setPictogramsTranslations] = useState<Translation[]>([]);
-	useEffect(() => {
-		if (pictograms) {
-			for (const pictogram of pictograms) {
-				db.getTranslationByUuidAndLanguage(pictogram.uuid, i18n.language, "word").then((translation) => {
-					if (translation) {
-						setPictogramsTranslations((prev) => [...prev, translation]);
-					}
-				});
-			}
-		}
-	}, [pictograms, i18n, i18n.language]);
+	// const [pictogramsTranslations, setPictogramsTranslations] = useState<Translation[]>([]);
+	// useEffect(() => {
+	// 	if (pictograms) {
+	// 		for (const pictogram of pictograms) {
+	// 			db.getTranslationByUuidAndLanguage(pictogram.uuid, i18n.language, "word").then((translation) => {
+	// 				if (translation) {
+	// 					setPictogramsTranslations((prev) => [...prev, translation]);
+	// 				}
+	// 			});
+	// 		}
+	// 	}
+	// }, [pictograms, i18n, i18n.language]);
 
 	const [categoriesTranslations, setCategoriesTranslations] = useState<Translation[]>([]);
 	useEffect(() => {
@@ -90,8 +90,6 @@ export default function RootPage() {
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4">
 					{pictograms && pictograms.filter((pictogram) => {
 						return (activeCategories.includes(pictogram.categoryUuid)) || activeCategories.length === 0;
-					}).map((pictogram) => {
-						return { ...pictogram, word: pictogramsTranslations.find((translation) => translation.objectUuid === pictogram.uuid)?.value || "" };
 					}).sort((a, b) => byAlphabeticalOrder(a.word, b.word)).map(item => (
 						<button
 							key={item.uuid}

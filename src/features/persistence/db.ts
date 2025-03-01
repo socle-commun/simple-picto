@@ -94,12 +94,25 @@ export class SimplePictoDB extends Dexie {
 		}
 	}
 
-	public async getCurrentBinderUuid() {
+	public getCurrentBinderUuid() {
 		return this.getSetting(ACTIVE_BINDER_ID);
 	}
 
-	public async getTranslationByUuidAndLanguage(objectUuid: string, language: string, key: string) {
+	public getTranslationByUuidAndLanguage(objectUuid: string, language: string, key: string) {
 		return this.translations.get({ objectUuid, language, key });
+	}
+
+	public getActiveBinderTranslatedPictograms() {
+		return this.transaction("r", this.pictograms, this.settings, this.translations, () => {
+			return this.getActiveBinderPictograms().then((pictograms) => {
+				return this.translations.where("objectUuid").anyOf(pictograms.map((pictogram) => pictogram.uuid)).toArray().then((translations) => {
+					return pictograms.map((pictogram) => {
+						const pictogramTranslation = translations.find((translation) => translation.objectUuid === pictogram.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "word");
+						return { ...pictogram, word: pictogramTranslation?.value || "" };
+					});
+				});
+			});
+		});
 	}
 	//#endregion
 
@@ -127,16 +140,20 @@ export class SimplePictoDB extends Dexie {
 
 
 	// #region Update
-	public updateSetting(setting: Setting) {
-		return this.settings.update(setting.key, setting);
-	}
-
 	public updateBinder(binder: Binder) {
 		return this.binders.update(binder.uuid, binder);
 	}
 
+	public updateCategory(category: Category) {
+		return this.categories.update(category.uuid, category);
+	}
+
 	public updatePictogram(pictogram: Pictogram) {
 		return this.pictograms.update(pictogram.uuid, pictogram);
+	}
+
+	public updateSetting(setting: Setting) {
+		return this.settings.update(setting.key, setting);
 	}
 	// #endregion
 
