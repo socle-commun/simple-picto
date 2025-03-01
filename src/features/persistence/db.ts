@@ -1,12 +1,16 @@
 import Dexie, { Table } from "dexie";
 
 import { Binder } from "@/features/persistence/entities/Binder";
+import { TranslatedBinder } from "@/features/persistence/entities/translated/TranslatedBinder";
 import { Category } from "@/features/persistence/entities/Category";
+import { TranslatedCategory } from "@/features/persistence/entities/translated/TranslatedCategory";
 import { Pictogram } from "@/features/persistence/entities/Pictogram";
+import { TranslatedPictogram } from "@/features/persistence/entities/translated/TranslatedPictogram";
 import { ACTIVE_BINDER_ID, Setting } from "@/features/persistence/entities/Setting";
 import { Translation } from "@/features/persistence/entities/Translation";
 
 import { populate } from "@/features/persistence/populate";
+
 
 export class SimplePictoDB extends Dexie {
 	binders!: Table<Binder, string>;
@@ -102,13 +106,42 @@ export class SimplePictoDB extends Dexie {
 		return this.translations.get({ objectUuid, language, key });
 	}
 
-	public getActiveBinderTranslatedPictograms() {
+	public getActiveBinderTranslatedPictograms(): Promise<TranslatedPictogram[]> {
 		return this.transaction("r", this.pictograms, this.settings, this.translations, () => {
 			return this.getActiveBinderPictograms().then((pictograms) => {
 				return this.translations.where("objectUuid").anyOf(pictograms.map((pictogram) => pictogram.uuid)).toArray().then((translations) => {
 					return pictograms.map((pictogram) => {
 						const pictogramTranslation = translations.find((translation) => translation.objectUuid === pictogram.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "word");
 						return { ...pictogram, word: pictogramTranslation?.value || "" };
+					});
+				});
+			});
+		});
+	}
+
+	public getActiveBinderTranslatedCategories(): Promise<TranslatedCategory[]> {
+		return this.transaction("r", this.pictograms, this.categories, this.settings, this.translations, () => {
+			return this.getActiveBinderPictograms().then((pictograms) => {
+				return this.getCategoriesFromPictograms(pictograms).then((categories) => {
+					return this.translations.where("objectUuid").anyOf(categories.map((category) => category.uuid)).toArray().then((translations) => {
+						return categories.map((category) => {
+							const categoryTranslation = translations.find((translation) => translation.objectUuid === category.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "name");
+							return { ...category, name: categoryTranslation?.value || "" };
+						});
+					});
+				});
+			});
+		});
+	}
+
+	public getTranslatedBinders(): Promise<TranslatedBinder[]> {
+		return this.transaction("r", this.binders, this.settings, this.translations, () => {
+			return this.binders.toArray().then((binders) => {
+				return this.translations.where("objectUuid").anyOf(binders.map((binder) => binder.uuid)).toArray().then((translations) => {
+					return binders.map((binder) => {
+						const binderTitleTranslation = translations.find((translation) => translation.objectUuid === binder.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "title");
+						const binderDescriptionTranslation = translations.find((translation) => translation.objectUuid === binder.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "description");
+						return { ...binder, title: binderTitleTranslation?.value || "", description: binderDescriptionTranslation?.value || "" };
 					});
 				});
 			});

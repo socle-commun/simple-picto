@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "@/features/persistence/db";
-import { Translation } from "@/features/persistence/entities/Translation";
 import speak from "@/features/tts/speak";
 
 import Aside from "@/lib/components/aside";
@@ -28,35 +27,9 @@ export default function RootPage() {
 	);
 
 	const categories = useLiveQuery(
-		async () => pictograms ? db.getCategoriesFromPictograms(pictograms) : [],
-		[db, pictograms], []
+		async () => pictograms ? db.getActiveBinderTranslatedCategories() : [],
+		[db], []
 	);
-
-	// const [pictogramsTranslations, setPictogramsTranslations] = useState<Translation[]>([]);
-	// useEffect(() => {
-	// 	if (pictograms) {
-	// 		for (const pictogram of pictograms) {
-	// 			db.getTranslationByUuidAndLanguage(pictogram.uuid, i18n.language, "word").then((translation) => {
-	// 				if (translation) {
-	// 					setPictogramsTranslations((prev) => [...prev, translation]);
-	// 				}
-	// 			});
-	// 		}
-	// 	}
-	// }, [pictograms, i18n, i18n.language]);
-
-	const [categoriesTranslations, setCategoriesTranslations] = useState<Translation[]>([]);
-	useEffect(() => {
-		if (categories) {
-			for (const category of categories) {
-				db.getTranslationByUuidAndLanguage(category.uuid, i18n.language, "name").then((translation) => {
-					if (translation) {
-						setCategoriesTranslations((prev) => [...prev, translation]);
-					}
-				});
-			}
-		}
-	}, [categories, i18n, i18n.language]);
 
 	const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
@@ -71,9 +44,7 @@ export default function RootPage() {
 	return (
 		<>
 			<Aside role="complementary" className={cn("w-16 md:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
-				{categories && categories.map((category) => {
-					return { ...category, name: categoriesTranslations.find((translation) => translation.objectUuid === category.uuid)?.value || "" };
-				}).sort((a, b) => byAlphabeticalOrder(a.name, b.name)).map(category => (
+				{categories && categories.sort((a, b) => byAlphabeticalOrder(a.name, b.name)).map(category => (
 					<button
 						key={category.uuid}
 						onClick={() => toggleCategory(category.uuid)}
