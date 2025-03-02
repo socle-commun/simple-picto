@@ -30,7 +30,7 @@ export default function ActiveBinderSelector() {
 
 	return (
 		<>
-			<label htmlFor="active-binder-selector" className={cn("text-2xl")}>{t("pages.settings.activeBinder")}</label>
+			<label htmlFor="active-binder-selector" className={cn("text-2xl mb-4")}>{t("pages.settings.activeBinder")}</label>
 			<Select.Root
 				value={activeBinderUuid}
 				onValueChange={(uuid: string) => {

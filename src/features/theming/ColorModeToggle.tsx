@@ -27,7 +27,7 @@ export default function ColorModeToggle() {
 
 	return (
 		<>
-			<label htmlFor="color-mode-toggle" className={cn("text-2xl")}>{t("pages.settings.colorMode")}</label>
+			<label htmlFor="color-mode-toggle" className={cn("text-2xl mb-4")}>{t("pages.settings.colorMode")}</label>
 			<ToggleGroup
 				id="color-mode-toggle"
 				aria-label="Color mode"
