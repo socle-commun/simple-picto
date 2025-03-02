@@ -10,8 +10,8 @@ import { resolve } from "path";
 // https://vite.dev/config/
 export default defineConfig({
 	test: {
-	  environment: "jsdom",
-	  globals: true,
+		environment: "jsdom",
+		globals: true,
 	},
 	build: {
 		rollupOptions: {
@@ -22,6 +22,9 @@ export default defineConfig({
 					"react": ["react", "react-dom"],
 					"react-router": ["react-router"],
 					"recoil": ["recoil"],
+					"cn": ["clsx", "tailwind-merge"],
+					"base-ui": ["@base-ui-components/react"],
+					"vercel": ["@vercel/analytics", "@vercel/speed-insights"],
 				}
 			}
 		},
