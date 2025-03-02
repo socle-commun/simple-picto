@@ -25,18 +25,19 @@ export default function LocaleSelector() {
 
 	return (
 		<>
-			<label htmlFor="locale-selector" className={cn("text-2xl text-center")}>{t("pages.settings.language")}</label>
+			<label htmlFor="locale-selector" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.language")}</label>
+			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<Select.Root value={locale} onValueChange={(value) => {
 				setLocale(value);
 			}}>
-				<Select.Trigger id="locale-selector" className={cn("h-10 min-w-36 mt-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
+				<Select.Trigger id="locale-selector" className={cn("h-10 min-w-36 mt-4 mr-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
 					<Select.Value placeholder={t("pages.settings.language")} />
 					<Select.Icon className={cn("icon")}>
 						keyboard_arrow_down
 					</Select.Icon>
 				</Select.Trigger>
 				<Select.Portal>
-					<Select.Positioner side="bottom" align="start">
+					<Select.Positioner side="bottom" align="start" sideOffset={100}>
 						<Select.Popup className={cn("py-1 rounded-md bg-zinc-200 dark:bg-zinc-800 shadow-lg outline transition-all")}>
 							{i18n.languages.map((language) => (
 								<Select.Item key={language} value={language} className={cn("grid min-w-full cursor-default grid-cols-[0.75rem_1fr] items-center gap-4 py-2 pr-4 pl-2.5 outline-none select-none hover:text-sky-50 hover:bg-sky-500")}>

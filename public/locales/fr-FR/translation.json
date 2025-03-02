@@ -9,7 +9,8 @@
 		"settings": {
 			"language": "Langue",
 			"colorMode": "Mode de couleur",
-			"activeBinder": "Classeur actif"
+			"activeBinder": "Classeur actif",
+			"binders": "Classeurs"
 		}
 	},
 	"navigation": {

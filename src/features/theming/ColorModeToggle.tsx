@@ -27,13 +27,14 @@ export default function ColorModeToggle() {
 
 	return (
 		<>
-			<label htmlFor="color-mode-toggle" className={cn("text-2xl text-center")}>{t("pages.settings.colorMode")}</label>
+			<label htmlFor="color-mode-toggle" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.colorMode")}</label>
+			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<ToggleGroup
 				id="color-mode-toggle"
 				aria-label="Color mode"
 				value={[colorMode]}
 				onValueChange={(value) => setColorMode(value[0] as "light" | "dark" | "system" ? value[0] as "light" | "dark" | "system" : "system")}
-				className={cn("w-min mx-auto mt-auto flex items-center justify-around rounded-md border")}
+				className={cn("w-min mr-auto mt-4 flex items-center justify-around rounded-md border")}
 			>
 				{
 					Array.from([

@@ -1,23 +1,28 @@
-import { type ReactNode, useEffect } from "react";
+import { useEffect } from "react";
+
+import { useLiveQuery } from "dexie-react-hooks";
 
 import { useTranslation } from "react-i18next";
 
+import { db } from "@/features/persistence/db";
 import LocaleSelector from "@/features/i18n/LocaleSelector";
 import ColorModeToggle from "@/features/theming/ColorModeToggle";
+
+import Div from "@/lib/components/div";
+
 import ActiveBinderSelector from "@/partials/settings/ActiveBinderSelector";
+import SettingCard from "@/partials/settings/SettingCard";
 
 import { cn } from "@/utilities/cn";
 
-function SettingCard({ children, className }: { children: ReactNode; className?: string }) {
-	return (
-		<div className={cn("flex flex-col p-2 gap-2 bg-zinc-200 dark:bg-zinc-800 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all ease-in-out duration-150", className)}>
-			{children}
-		</div>
-	);
-}
 
 export default function SettingsPage() {
 	const { t } = useTranslation();
+
+	const binders = useLiveQuery(
+		async () => db.getTranslatedBinders(),
+		[db, t]
+	);
 
 	useEffect(() => {
 		document.title = t("pages.titles.settings");
@@ -25,8 +30,8 @@ export default function SettingsPage() {
 
 	return (
 		<>
-			<h1 className={cn("text-4xl font-bold")}>{t("pages.titles.settings")}</h1>
-			<div className={cn("grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4 lg:gap-6")}>
+			<h1 className={cn("text-4xl font-bold mt-2 mb-4")}>{t("pages.titles.settings")}</h1>
+			<Div className={cn("grid grid-cols-1 gap-2 md:gap-4 lg:gap-6")}>
 				<SettingCard>
 					<LocaleSelector />
 				</SettingCard>
@@ -36,7 +41,16 @@ export default function SettingsPage() {
 				<SettingCard>
 					<ActiveBinderSelector />
 				</SettingCard>
-			</div>
+				<SettingCard>
+					<h2 className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.binders")}</h2>
+					<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
+					<ul className={cn("mt-4 pl-8 list-disc")}>
+						{binders?.map((binder) => (
+							<li key={binder.uuid}>{binder.title}</li>
+						))}
+					</ul>
+				</SettingCard>
+			</Div>
 		</>
 	)
 }
