@@ -29,7 +29,7 @@ export default function LocaleSelector() {
 			<Select.Root value={locale} onValueChange={(value) => {
 				setLocale(value);
 			}}>
-				<Select.Trigger id="locale-selector" className={cn("h-10 min-w-36 mt-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
+				<Select.Trigger id="locale-selector" className={cn("h-10 min-w-36 mt-auto mr-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
 					<Select.Value placeholder={t("pages.settings.language")} />
 					<Select.Icon className={cn("icon")}>
 						keyboard_arrow_down

@@ -33,7 +33,7 @@ export default function ColorModeToggle() {
 				aria-label="Color mode"
 				value={[colorMode]}
 				onValueChange={(value) => setColorMode(value[0] as "light" | "dark" | "system" ? value[0] as "light" | "dark" | "system" : "system")}
-				className={cn("w-min mx-auto mt-auto flex items-center justify-around rounded-md border")}
+				className={cn("w-min mr-auto mt-auto flex items-center justify-around rounded-md border")}
 			>
 				{
 					Array.from([
