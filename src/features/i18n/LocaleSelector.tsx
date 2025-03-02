@@ -25,7 +25,7 @@ export default function LocaleSelector() {
 
 	return (
 		<>
-			<label htmlFor="locale-selector" className={cn("text-2xl text-center")}>{t("pages.settings.language")}</label>
+			<label htmlFor="locale-selector" className={cn("text-2xl")}>{t("pages.settings.language")}</label>
 			<Select.Root value={locale} onValueChange={(value) => {
 				setLocale(value);
 			}}>

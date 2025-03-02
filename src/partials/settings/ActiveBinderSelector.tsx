@@ -11,16 +11,16 @@ import { db } from "@/features/persistence/db";
 import { cn } from "@/utilities/cn";
 
 export default function ActiveBinderSelector() {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
+
+	const binders = useLiveQuery(
+		async () => db.getTranslatedBinders(),
+		[db]
+	);
 
 	const activeBinderUuidSetting = useLiveQuery(
 		async () => db.getCurrentBinderUuid(),
 		[db]
-	);
-
-	const binders = useLiveQuery(
-		async () => db.getTranslatedBinders(),
-		[db, i18n]
 	);
 
 	const [activeBinderUuid, setActiveBinderUuid] = useState<string>("");
@@ -30,7 +30,7 @@ export default function ActiveBinderSelector() {
 
 	return (
 		<>
-			<label htmlFor="active-binder-selector" className={cn("text-2xl text-center")}>{t("pages.settings.activeBinder")}</label>
+			<label htmlFor="active-binder-selector" className={cn("text-2xl")}>{t("pages.settings.activeBinder")}</label>
 			<Select.Root
 				value={activeBinderUuid}
 				onValueChange={(uuid: string) => {

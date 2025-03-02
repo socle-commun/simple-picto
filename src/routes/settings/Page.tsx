@@ -26,7 +26,7 @@ export default function SettingsPage() {
 	return (
 		<>
 			<h1 className={cn("text-4xl font-bold")}>{t("pages.titles.settings")}</h1>
-			<div className={cn("grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4 lg:gap-6")}>
+			<div className={cn("grid grid-cols-1 md:w-3xl md:mx-auto gap-2 md:gap-4 lg:gap-6")}>
 				<SettingCard>
 					<LocaleSelector />
 				</SettingCard>
