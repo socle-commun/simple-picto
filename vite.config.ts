@@ -21,7 +21,6 @@ export default defineConfig({
 					"i18-next": ["i18next", "react-i18next", "i18next-http-backend", "i18next-browser-languagedetector"],
 					"react": ["react", "react-dom"],
 					"react-router": ["react-router"],
-					"recoil": ["recoil"],
 					"cn": ["clsx", "tailwind-merge"],
 					"base-ui": ["@base-ui-components/react"],
 					"vercel": ["@vercel/analytics", "@vercel/speed-insights"],

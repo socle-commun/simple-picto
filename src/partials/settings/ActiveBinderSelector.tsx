@@ -15,7 +15,7 @@ export default function ActiveBinderSelector() {
 
 	const binders = useLiveQuery(
 		async () => db.getTranslatedBinders(),
-		[db]
+		[db, t]
 	);
 
 	const activeBinderUuidSetting = useLiveQuery(
@@ -54,7 +54,8 @@ export default function ActiveBinderSelector() {
 										check
 									</Select.ItemIndicator>
 									<Select.ItemText className={cn("col-start-2 flex items-center gap-2")}>
-										{binder.title}
+										<span>{binder.title}</span>
+										<span> ({binder.description})</span>
 									</Select.ItemText>
 								</Select.Item>
 							))}
