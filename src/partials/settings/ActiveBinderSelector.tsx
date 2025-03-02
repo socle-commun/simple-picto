@@ -40,7 +40,7 @@ export default function ActiveBinderSelector() {
 						db.updateSetting(activeBinderUuidSetting);
 					}
 				}}>
-				<Select.Trigger id="active-binder-selector" className={cn("h-10 min-w-36 mt-4 mr-auto flex items-center justify-between px-2 gap-2 rounded-md border text-base select-none")}>
+				<Select.Trigger id="active-binder-selector" className={cn("h-10 min-w-36 mt-4 mr-auto flex items-center justify-between px-2 gap-2 rounded-md border select-none")}>
 					<Select.Value placeholder={t("pages.settings.activeBinder")} />
 					<Select.Icon className={cn("icon")}>
 						keyboard_arrow_down
