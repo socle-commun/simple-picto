@@ -8,6 +8,8 @@ import { db } from "@/features/persistence/db";
 import LocaleSelector from "@/features/i18n/LocaleSelector";
 import ColorModeToggle from "@/features/theming/ColorModeToggle";
 
+import Div from "@/lib/components/div";
+
 import ActiveBinderSelector from "@/partials/settings/ActiveBinderSelector";
 import SettingCard from "@/partials/settings/SettingCard";
 
@@ -28,8 +30,8 @@ export default function SettingsPage() {
 
 	return (
 		<>
-			<h1 className={cn("text-4xl font-bold")}>{t("pages.titles.settings")}</h1>
-			<div className={cn("grid grid-cols-1 gap-2 md:gap-4 lg:gap-6")}>
+			<h1 className={cn("text-4xl font-bold mt-2 mb-4")}>{t("pages.titles.settings")}</h1>
+			<Div className={cn("grid grid-cols-1 gap-2 md:gap-4 lg:gap-6")}>
 				<SettingCard>
 					<LocaleSelector />
 				</SettingCard>
@@ -48,7 +50,7 @@ export default function SettingsPage() {
 						))}
 					</ul>
 				</SettingCard>
-			</div>
+			</Div>
 		</>
 	)
 }

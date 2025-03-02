@@ -8,6 +8,8 @@ import { Select } from "@base-ui-components/react/select";
 
 import { db } from "@/features/persistence/db";
 
+import Div from "@/lib/components/div";
+
 import { cn } from "@/utilities/cn";
 
 export default function ActiveBinderSelector() {
@@ -33,6 +35,7 @@ export default function ActiveBinderSelector() {
 			<label htmlFor="active-binder-selector" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.activeBinder")}</label>
 			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<Select.Root
+				alignItemToTrigger={true}
 				value={activeBinderUuid}
 				onValueChange={(uuid: string) => {
 					if (activeBinderUuidSetting) {
@@ -56,7 +59,6 @@ export default function ActiveBinderSelector() {
 									</Select.ItemIndicator>
 									<Select.ItemText className={cn("col-start-2 flex flex-col gap-2")}>
 										<span>{binder.title}</span>
-										<span className={cn("text-sm text-zinc-400 dark:text-zinc-600")}>{binder.description}</span>
 									</Select.ItemText>
 								</Select.Item>
 							))}
@@ -64,6 +66,9 @@ export default function ActiveBinderSelector() {
 					</Select.Positioner>
 				</Select.Portal>
 			</Select.Root>
+			<Div className={cn("mt-2 pl-4 text-sm text-zinc-600 dark:text-zinc-400")}>
+				{binders && binders.find((binder) => binder.uuid === activeBinderUuid)?.description}
+			</Div>
 		</>
 	);
 };
