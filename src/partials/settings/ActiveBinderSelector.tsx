@@ -66,7 +66,7 @@ export default function ActiveBinderSelector() {
 					</Select.Positioner>
 				</Select.Portal>
 			</Select.Root>
-			<Div className={cn("mt-2 pl-4 text-sm text-zinc-600 dark:text-zinc-400")}>
+			<Div className={cn("mt-2 pl-4 text-sm text-zinc-400 dark:text-zinc-600")}>
 				{binders && binders.find((binder) => binder.uuid === activeBinderUuid)?.description}
 			</Div>
 		</>
