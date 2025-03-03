@@ -24,15 +24,13 @@ export default function ResponsiveTopBar({ brand, children, isOpen, onClick }: R
 						<Div className={cn("flex items-center md:block")}>
 							{brand}
 
-							<Div className={cn("ml-auto md:hidden")}>
-								<Button
-									className={cn("p-2 h-min rounded-full border border-gray-700 flex items-center justify-center")}
-									onClick={() => onClick()}
-								>
-									<Span className={cn("sr-only")}>Toggle main menu</Span>
-									<Span aria-hidden="true" className={cn("icon")}>{isOpen ? "close" : "menu"}</Span>
-								</Button>
-							</Div>
+							<Button
+								className={cn("ml-auto p-2 h-min flex items-center justify-center rounded-full bg-zinc-300 dark:bg-zinc-700 md:hidden")}
+								onClick={() => onClick()}
+							>
+								<Span className={cn("sr-only")}>Toggle main menu</Span>
+								<Span aria-hidden="true" className={cn("icon")}>{isOpen ? "close" : "menu"}</Span>
+							</Button>
 						</Div>
 					</Div>
 					<Div>

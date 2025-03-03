@@ -35,7 +35,6 @@ export default function ActiveBinderSelector() {
 			<label htmlFor="active-binder-selector" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.activeBinder")}</label>
 			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<Select.Root
-				alignItemToTrigger={true}
 				value={activeBinderUuid}
 				onValueChange={(uuid: string) => {
 					if (activeBinderUuidSetting) {
@@ -66,7 +65,7 @@ export default function ActiveBinderSelector() {
 					</Select.Positioner>
 				</Select.Portal>
 			</Select.Root>
-			<Div className={cn("mt-2 pl-4 text-sm text-zinc-400 dark:text-zinc-600")}>
+			<Div className={cn("mt-2 pl-4 text-sm text-zinc-600 dark:text-zinc-500")}>
 				{binders && binders.find((binder) => binder.uuid === activeBinderUuid)?.description}
 			</Div>
 		</>

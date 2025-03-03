@@ -43,7 +43,7 @@ export default function RootPage() {
 
 	return (
 		<>
-			<Aside role="complementary" className={cn("w-16 md:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
+			<Aside role="complementary" className={cn("w-16 md:w-64 lg:w-3xs px-2 md:px-6 lg:px-8 py-4 flex flex-col gap-2 bg-zinc-200 dark:bg-zinc-800")}>
 				{categories && categories.sort((a, b) => byAlphabeticalOrder(a.name, b.name)).map(category => (
 					<button
 						key={category.uuid}
