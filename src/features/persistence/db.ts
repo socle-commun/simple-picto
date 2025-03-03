@@ -196,10 +196,11 @@ export class SimplePictoDB extends Dexie {
 		this.settings.delete(key);
 	}
 
-	public deleteBinder(uuid: string) {
+	public deleteBinder(binderUuid: string) {
+		console.log("Deleting binder", binderUuid);
 		return this.transaction("rw", this.pictograms, this.binders, () => {
-			this.pictograms.where({ binderId: uuid }).delete();
-			this.binders.delete(uuid);
+			this.pictograms.where({ binderUuid }).delete();
+			this.binders.delete(binderUuid);
 		});
 	}
 

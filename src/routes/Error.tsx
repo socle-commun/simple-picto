@@ -3,7 +3,6 @@ import Main from "@/lib/components/main";
 
 import { cn } from "@/utilities/cn";
 
-
 export default function RootError() {
 	return (
 		<>

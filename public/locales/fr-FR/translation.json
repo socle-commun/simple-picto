@@ -10,7 +10,11 @@
 			"language": "Langue",
 			"colorMode": "Mode de couleur",
 			"activeBinder": "Classeur actif",
-			"binders": "Classeurs"
+			"binders": "Classeurs",
+			"by": "par",
+			"new": "Nouveau",
+			"edit": "Modifier",
+			"delete": "Supprimer"
 		}
 	},
 	"navigation": {
