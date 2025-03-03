@@ -22,8 +22,7 @@ export default function ResponsiveTopBar({ brand, children, isOpen, onClick }: R
 				<Div className={cn("flex flex-col md:items-center md:flex-row md:justify-between")}>
 					<Div>
 						<Div className={cn("flex items-center md:block")}>
-							{brand}
-
+							<Span>{brand}</Span>
 							<Button
 								className={cn("ml-auto p-2 h-min flex items-center justify-center rounded-full bg-zinc-300 dark:bg-zinc-700 md:hidden")}
 								onClick={() => onClick()}

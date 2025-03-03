@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 
 import { Select } from '@base-ui-components/react/select';
 
+import Label from "@/lib/components/label";
+
 import { cn } from "@/utilities/cn";
 
 const locales: {
@@ -25,7 +27,7 @@ export default function LocaleSelector() {
 
 	return (
 		<>
-			<label htmlFor="locale-selector" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.language")}</label>
+			<Label htmlFor="locale-selector" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.language")}</Label>
 			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<Select.Root value={locale} onValueChange={(value) => {
 				setLocale(value);
