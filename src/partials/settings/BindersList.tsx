@@ -46,13 +46,13 @@ export default function BindersList() {
 						<Div className={cn("text-zinc-600 dark:text-zinc-500 mb-2")}>{binder.description}</Div>
 						<hr className={cn("border-zinc-600 dark:border-zinc-400 -mx-4")} />
 						<Div className={cn("flex justify-end gap-2 -mx-4 px-2")}>
-							<NavLink to={binder.uuid} className={cn("flex items-center justify-center gap-2 p-2 text-sm md:text-base bg-sky-500 text-sky-50 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
+							<NavLink to={binder.uuid} className={cn("w-11 flex items-center justify-center gap-2 p-2 text-sm md:text-base bg-sky-500 text-sky-50 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
 								<Span className={cn("icon")}>edit</Span>
 								<Span className={cn("sr-only")}>{t("pages.settings.edit")}</Span>
 							</NavLink>
 							<Button
 								onClick={() => onDeleteBinder(binder.uuid)}
-								className={cn("flex items-center justify-center gap-2 p-2 text-sm md:text-base border-2 border-red-500 text-red-500 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
+								className={cn("w-11 flex items-center justify-center gap-2 p-2 text-sm md:text-base border-2 border-red-500 text-red-500 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
 								<Span className={cn("icon")}>delete</Span>
 								<Span className={cn("sr-only")}>{t("pages.settings.delete")}</Span>
 							</Button>
