@@ -147,6 +147,21 @@ export class SimplePictoDB extends Dexie {
 			});
 		});
 	}
+
+	public getTranslatedBinder(uuid: string): Promise<TranslatedBinder> {
+		return this.transaction("r", this.binders, this.settings, this.translations, () => {
+			return this.binders.get(uuid).then((binder) => {
+				if (!binder) {
+					return Promise.reject(new Error("Binder not found"));
+				}
+				return this.translations.where("objectUuid").anyOf(binder.uuid).toArray().then((translations) => {
+					const binderTitleTranslation = translations.find((translation) => translation.objectUuid === binder.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "title");
+					const binderDescriptionTranslation = translations.find((translation) => translation.objectUuid === binder.uuid && translation.language === localStorage.getItem("i18nextLng") && translation.key === "description");
+					return { ...binder, title: binderTitleTranslation?.value || "", description: binderDescriptionTranslation?.value || "" };
+				});
+			});
+		});
+	}
 	//#endregion
 
 	// #region Create
@@ -173,6 +188,14 @@ export class SimplePictoDB extends Dexie {
 
 
 	// #region Update
+	public updateTranslatedBinder(binder: TranslatedBinder, language: string) {
+		return this.transaction("rw", this.binders, this.translations, () => {
+			this.binders.update(binder.uuid, binder);
+			this.translations.where({ objectUuid: binder.uuid, language, key: "title" }).modify({ value: binder.title });
+			this.translations.where({ objectUuid: binder.uuid, language, key: "description" }).modify({ value: binder.description });
+		});
+	}
+
 	public updateBinder(binder: Binder) {
 		return this.binders.update(binder.uuid, binder);
 	}
@@ -197,7 +220,6 @@ export class SimplePictoDB extends Dexie {
 	}
 
 	public deleteBinder(binderUuid: string) {
-		console.log("Deleting binder", binderUuid);
 		return this.transaction("rw", this.pictograms, this.binders, () => {
 			this.pictograms.where({ binderUuid }).delete();
 			this.binders.delete(binderUuid);
