@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { Toggle } from '@base-ui-components/react/toggle';
 import { ToggleGroup } from '@base-ui-components/react/toggle-group';
 
+import Label from "@/lib/components/label";
+
 import toggleDarkClass from "@/features/theming/toggleDarkClass";
 
 import { cn } from "@/utilities/cn";
@@ -27,7 +29,7 @@ export default function ColorModeToggle() {
 
 	return (
 		<>
-			<label htmlFor="color-mode-toggle" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.colorMode")}</label>
+			<Label htmlFor="color-mode-toggle" className={cn("mb-2 text-2xl font-bold")}>{t("pages.settings.colorMode")}</Label>
 			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<ToggleGroup
 				id="color-mode-toggle"

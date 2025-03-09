@@ -10,7 +10,11 @@
 			"language": "Language",
 			"colorMode": "Color mode",
 			"activeBinder": "Active binder",
-			"binders": "Binders"
+			"binders": "Binders",
+			"by": "by",
+			"new": "New",
+			"edit": "Edit",
+			"delete": "Delete"
 		}
 	},
 	"navigation": {

@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
 
+import Span from "@/lib/components/span";
+
 import ResponsiveTopBar from "@/components/nav/ResponsiveTopBar";
 import TopBarNavLink from "@/components/nav/TopBarNavLink";
 
@@ -24,8 +26,8 @@ export default function RootLayout() {
 				onClick={toggleOpen}
 				brand={<Brand />}>
 				<TopBarNavLink to="/settings" onClick={toggleOpen}>
-					<span className={cn("icon")}>settings</span>
-					<span>{t("navigation.settings")}</span>
+					<Span className={cn("icon")}>settings</Span>
+					<Span>{t("navigation.settings")}</Span>
 				</TopBarNavLink>
 			</ResponsiveTopBar>
 

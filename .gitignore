@@ -1,4 +1,6 @@
 .svelte-kit
+docs/.vitepress/dist
+docs/.vitepress/cache
 
 # Logs
 logs
