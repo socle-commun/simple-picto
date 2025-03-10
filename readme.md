@@ -25,25 +25,25 @@ cd simple-picto
 - **Installation des dépendances:**
 
 ```sh
-npm install  # ou yarn install
+npm install
 ```
 
 - **Lancement de l'application en mode développement:**
 
 ```sh
-npm run dev  # ou yarn dev
+npm run dev
 ```
 
 - **Build de l'application:**
 
 ```sh
-npm run build  # ou yarn build
+npm run build
 ```
 
 - **Preview de l'application buildé:**
 
 ```sh
-npm run preview  # ou yarn preview
+npm run preview
 ```
 
 ## Technologies utilisées

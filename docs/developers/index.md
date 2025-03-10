@@ -6,12 +6,12 @@
 
 ## 🏠 Technologies utilisées
 
-- ⚡ **Vite** – Build rapide
-- 🔵 **Typescript** – Typage sécurisé
-- ⚛️ **React** – Interface utilisateur dynamique
-- 💾 **Dexie** – Base de données locale IndexedDB
-- 🌐 **i18next** – Internationalisation
-- 🚯 **React Router** – Navigation
+- ⚡ **[Vite](https://vite.dev/)** – Build rapide
+- 🔵 **[Typescript](https://www.typescriptlang.org/)** – Typage sécurisé
+- ⚛️ **[React](https://react.dev/)** – Interface utilisateur dynamique
+- 💾 **[Dexie](https://dexie.org/)** – Base de données locale IndexedDB
+- 🌐 **[i18next](https://www.i18next.com/)** – Internationalisation
+- 🚯 **[React Router](https://reactrouter.com/)** – Navigation
 
 ## 🛂 Installation & Développement
 
@@ -25,25 +25,25 @@ cd simple-picto
 ### 2. Installer les dépendances
 
 ```sh
-npm install  # ou yarn install
+npm install
 ```
 
 ### 3. Lancer en mode développement
 
 ```sh
-npm run dev  # ou yarn dev
+npm run dev
 ```
 
 ### 4. Compiler le projet
 
 ```sh
-npm run build  # ou yarn build
+npm run build
 ```
 
 ### 5. Prévisualiser la version buildée
 
 ```sh
-npm run preview  # ou yarn preview
+npm run preview
 ```
 
 ## 🔧 TODO & Améliorations
