@@ -90,7 +90,8 @@ export default function BinderEditPage() {
 								tune
 							</span>
 							<h2 className={cn("text-2xl font-bold")}>Settings</h2>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 transition-all ease-in-out origin-center group-data-[panel-open]:rotate-45")}>add</span>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
@@ -105,7 +106,8 @@ export default function BinderEditPage() {
 								image
 							</span>
 							<h2 className={cn("text-2xl font-bold")}>Pictograms</h2>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 transition-all ease-in-out origin-center group-data-[panel-open]:rotate-45")}>add</span>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
