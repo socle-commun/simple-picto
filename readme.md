@@ -13,7 +13,7 @@ Simple Picto est une application de classeur de communication visuelle 📖 qui 
 - 🎨 **Design responsive** pour un affichage agréable sur smartphones, tablettes et ordinateurs
 - 🆓 **Gratuit et Open Source** (license à définir)
 
-## 🚀 Installation
+## 🚀 Pour commencer
 
 - **Clone du repo:**
 
@@ -70,8 +70,8 @@ npm run preview
 
 - 📏 **Améliorer le design responsive**
   - ✅ 📱 Définir l'UI mobile pour le filtrage par catégories
-  - 📜 Créer un menu responsive pour la navigation principale
+  - ✅ 📜 Créer un menu responsive pour la navigation principale
     - ✅ 🏠 **Navigation principale** : accueil & paramètres
 - 🖼️ **Améliorer le classeur par défaut** ⇨ à voir éventuellement avec un professionnel
 - ✅ 🌎 **Traduire le classeur par défaut** pour respecter la langue choisie
-- **Mode daltoniens** pour les gens qui ont des problèmes de vision des couleurs
+- 🎨 **Mode daltoniens** pour les gens qui ont des problèmes de vision des couleurs

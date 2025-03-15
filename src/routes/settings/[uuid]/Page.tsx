@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
 
@@ -6,32 +6,21 @@ import { useTranslation } from "react-i18next";
 
 import { useParams } from "react-router";
 
+import { Accordion } from '@base-ui-components/react/accordion';
+
 import { db } from "@/features/persistence/db";
 
 import SettingCard from "@/partials/settings/SettingCard";
 
 import { cn } from "@/utilities/cn";
 
-function BackButton({ onClick, children, className }: { onClick: () => void; children: ReactNode; className: string; }) {
-	return (
-		<button onClick={onClick} className={cn("px-4 py-2 rounded-md border-2 border-sky-500 text-sky-500 font-semibold", className)}>
-			{children}
-		</button>
-	);
-}
-function NextButton({ onClick, children, className }: { onClick: () => void; children: ReactNode; className: string; }) {
-	return (
-		<button onClick={onClick} className={cn("px-4 py-2 text-white rounded-md bg-sky-500", className)}>
-			{children}
-		</button>
-	);
-}
+export default function BinderEditPage() {
+	const { uuid } = useParams();
 
-function StepDetails({ onNext, uuid }: { onNext: () => void; uuid: string; }) {
 	const { t, i18n } = useTranslation();
 
 	const binder = useLiveQuery(
-		async () => db.getTranslatedBinder(uuid),
+		async () => (uuid ? db.getTranslatedBinder(uuid) : undefined),
 		[db, t, uuid]
 	);
 
@@ -47,92 +36,84 @@ function StepDetails({ onNext, uuid }: { onNext: () => void; uuid: string; }) {
 		}
 	}, [binder]);
 
-
-	function onClick() {
-		// Save the details
-		if (binder) {
-			binder.title = title;
-			binder.author = author;
-			binder.description = description;
-
-			db.updateTranslatedBinder(binder, i18n.language);
-		}
-		onNext();
-	}
-	return (
-		<>
-			<h2 className={cn("col-span-2 text-2xl font-bold")}>Details</h2>
-			<div className={cn("col-span-2 grid grid-cols-[auto_1fr] gap-4")}>
-
-				<label htmlFor="title">Title</label>
-				<input id="title" value={title} onChange={(event) => setTitle(event.target.value)} className={cn("p-1 border-2 border-zinc-500 rounded-sm focus:border-sky-500 active:border-sky-500")} />
-
-				<label htmlFor="author">Author</label>
-				<input id="author" value={author} onChange={(event) => setAuthor(event.target.value)} className={cn("p-1 border-2 border-zinc-500 rounded-sm focus:border-sky-500 active:border-sky-500")} />
-
-				<label htmlFor="description">Description</label>
-				<textarea id="description" value={description} onChange={(event) => setDescription(event.target.value)} className={cn("p-1 border-2 border-zinc-500 rounded-sm focus:border-sky-500 active:border-sky-500")} />
-
-			</div>
-			<NextButton onClick={onClick} className={cn("col-start-2")}>Next</NextButton>
-		</>
-	);
-}
-function StepSettings({ onNext, onBack }: { onNext: () => void, onBack: () => void }) {
-	return (
-		<>
-			<h2 className={cn("col-span-2 text-2xl font-bold")}>Settings</h2>
-			{/* Add form fields for settings */}
-			<form className={cn("grid grid-cols-2 gap-4")}>
-
-			</form>
-			<BackButton onClick={onBack} className={cn("col-start-1")}>Back</BackButton>
-			<NextButton onClick={onNext} className={cn("col-start-2")}>Next</NextButton>
-		</>
-	);
-}
-function StepPictogram({ onBack }: { onBack: () => void }) {
-	return (
-		<>
-			<h2 className={cn("col-span-2 text-2xl font-bold")}>Review</h2>
-			{/* Add review information */}
-			<form className={cn("grid grid-cols-2 gap-4")}>
-
-			</form>
-			<BackButton onClick={onBack} className={cn("col-start-1")}>Back</BackButton>
-		</>
-	);
-}
-
-export default function BinderEditPage() {
-	const { uuid } = useParams();
-
-	const [currentStep, setCurrentStep] = useState(0);
-	const handleNext = () => setCurrentStep((prev) => prev + 1);
-	const handleBack = () => setCurrentStep((prev) => prev - 1);
-
-	const steps = ["Details", "Settings", "Pictograms"];
-
 	return (
 		<SettingCard>
-			<h1 className={cn("text-4xl font-bold")}>Edit Binder</h1>
-			<div className={cn("flex justify-center gap-4")}>
-				{steps.map((step, index) => (
-					<span key={index} className={cn("px-4 py-2 flex align-center gap-2 rounded-full", index === currentStep ? "font-bold bg-gradient-to-br from-[#ff0066] from-0% to-[#bd34fe] to-75% text-white" : "font-normal bg-zinc-300 dark:bg-zinc-700 text-inherit")}>
-						<span className={cn("icon")}>
-							{index === 0 && "page_info"}
-							{index === 1 && "tune"}
-							{index === 2 && "image"}
-						</span>
-						<span>{step}</span>
-					</span>
-				))}
-			</div>
-			<div className={cn("grid grid-cols-2 gap-8")}>
-				{currentStep === 0 && <StepDetails uuid={uuid || ""} onNext={handleNext} />}
-				{currentStep === 1 && <StepSettings onNext={handleNext} onBack={handleBack} />}
-				{currentStep === 2 && <StepPictogram onBack={handleBack} />}
-			</div>
+			<h1 className={cn("mb-4 text-4xl font-bold")}>{binder ? binder.title : ""}</h1>
+			<Accordion.Root openMultiple={false}>
+				<Accordion.Item id="details" title="Details">
+					<Accordion.Header>
+						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
+							<span className={cn("icon")}>
+								page_info
+							</span>
+							<h2 className={cn("text-2xl font-bold")}>Details</h2>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
+						</Accordion.Trigger>
+					</Accordion.Header>
+					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
+						<div className={cn("grid grid-cols-[auto_1fr] p-2 gap-4")}>
+
+							<label htmlFor="title">Title</label>
+							<input id="title" value={title} onChange={(event) => {
+								if (binder) {
+									binder.title = event.target.value;
+
+									db.updateTranslatedBinder(binder, i18n.language);
+								}
+							}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
+
+							<label htmlFor="author">Author</label>
+							<input id="author" value={author} onChange={(event) => {
+								if (binder) {
+									binder.author = event.target.value;
+
+									db.updateTranslatedBinder(binder, i18n.language);
+								}
+							}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
+
+							<label htmlFor="description">Description</label>
+							<textarea id="description" value={description} onChange={(event) => {
+								if (binder) {
+									binder.description = event.target.value;
+
+									db.updateTranslatedBinder(binder, i18n.language);
+								}
+							}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
+						</div>
+					</Accordion.Panel>
+				</Accordion.Item>
+				<Accordion.Item id="settings" title="Settings">
+					<Accordion.Header>
+						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
+							<span className={cn("icon")}>
+								tune
+							</span>
+							<h2 className={cn("text-2xl font-bold")}>Settings</h2>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 transition-all ease-in-out origin-center group-data-[panel-open]:rotate-45")}>add</span>
+						</Accordion.Trigger>
+					</Accordion.Header>
+					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
+						<div className={cn("grid grid-cols-[auto_1fr] p-2 gap-4")}>
+						</div>
+					</Accordion.Panel>
+				</Accordion.Item>
+				<Accordion.Item id="pictograms" title="Pictograms">
+					<Accordion.Header>
+						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
+							<span className={cn("icon")}>
+								image
+							</span>
+							<h2 className={cn("text-2xl font-bold")}>Pictograms</h2>
+							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 transition-all ease-in-out origin-center group-data-[panel-open]:rotate-45")}>add</span>
+						</Accordion.Trigger>
+					</Accordion.Header>
+					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
+						<div className={cn("grid grid-cols-2 p-2 gap-4")}>
+						</div>
+					</Accordion.Panel>
+				</Accordion.Item>
+			</Accordion.Root>
 		</SettingCard>
 	);
 }
