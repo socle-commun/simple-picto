@@ -16,7 +16,6 @@ import RootPage from "@/routes/Page";
 import SettingsLayout from "@/routes/settings/Layout";
 import SettingsPage from "@/routes/settings/Page";
 import BinderEditPage from "@/routes/settings/[uuid]/Page";
-import BinderCreatePage from "@/routes/settings/create/Page";
 
 function App() {
 	useEffect(() => {
@@ -39,7 +38,6 @@ function App() {
 						<Route path="settings" element={<SettingsLayout />}>
 							<Route index element={<SettingsPage />} />
 							<Route path=":uuid" element={<BinderEditPage />} />
-							<Route path="create" element={<BinderCreatePage />} />
 						</Route>
 
 						<Route path="*" element={<RootError />} />
