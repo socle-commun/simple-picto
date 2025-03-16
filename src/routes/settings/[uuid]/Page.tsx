@@ -83,22 +83,6 @@ export default function BinderEditPage() {
 						</div>
 					</Accordion.Panel>
 				</Accordion.Item>
-				<Accordion.Item id="settings" title="Settings">
-					<Accordion.Header>
-						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
-							<span className={cn("icon")}>
-								tune
-							</span>
-							<h2 className={cn("text-2xl font-bold")}>Settings</h2>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
-						</Accordion.Trigger>
-					</Accordion.Header>
-					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
-						<div className={cn("grid grid-cols-[auto_1fr] p-2 gap-4")}>
-						</div>
-					</Accordion.Panel>
-				</Accordion.Item>
 				<Accordion.Item id="pictograms" title="Pictograms">
 					<Accordion.Header>
 						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
