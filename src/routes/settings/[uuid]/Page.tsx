@@ -24,17 +24,10 @@ export default function BinderEditPage() {
 		[db, t, uuid]
 	);
 
-	const [title, setTitle] = useState(binder?.title ?? "");
-	const [author, setAuthor] = useState(binder?.author ?? "");
-	const [description, setDescription] = useState(binder?.description ?? "");
-
-	useEffect(() => {
-		if (binder) {
-			setTitle(binder.title);
-			setAuthor(binder.author);
-			setDescription(binder.description);
-		}
-	}, [binder]);
+	const pictograms = useLiveQuery(
+		async () => (uuid ? db.getTranslatedPictograms(uuid) : undefined),
+		[db, t, uuid]
+	);
 
 	return (
 		<SettingCard>
@@ -55,7 +48,7 @@ export default function BinderEditPage() {
 						<div className={cn("grid grid-cols-[auto_1fr] p-2 gap-4")}>
 
 							<label htmlFor="title">Title</label>
-							<input id="title" value={title} onChange={(event) => {
+							<input id="title" value={binder?.title ?? ""} onChange={(event) => {
 								if (binder) {
 									binder.title = event.target.value;
 
@@ -64,7 +57,7 @@ export default function BinderEditPage() {
 							}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
 
 							<label htmlFor="author">Author</label>
-							<input id="author" value={author} onChange={(event) => {
+							<input id="author" value={binder?.author ?? ""} onChange={(event) => {
 								if (binder) {
 									binder.author = event.target.value;
 
@@ -73,7 +66,7 @@ export default function BinderEditPage() {
 							}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
 
 							<label htmlFor="description">Description</label>
-							<textarea id="description" value={description} onChange={(event) => {
+							<textarea id="description" value={binder?.description ?? ""} onChange={(event) => {
 								if (binder) {
 									binder.description = event.target.value;
 
@@ -96,6 +89,12 @@ export default function BinderEditPage() {
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
 						<div className={cn("grid grid-cols-2 p-2 gap-4")}>
+							{pictograms?.map((pictogram) => (
+								<div>
+									{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[200px]" />}
+									<p className={cn("text-center")}>{pictogram.word}</p>
+								</div>
+							))}
 						</div>
 					</Accordion.Panel>
 				</Accordion.Item>
