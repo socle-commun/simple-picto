@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-alpha.6",
+    "@socle-commun/simple-picto-core": "^0.1.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "clsx": "^2.1.1",
