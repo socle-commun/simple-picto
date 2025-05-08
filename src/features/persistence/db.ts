@@ -224,6 +224,20 @@ export class SimplePictoDB extends Dexie {
 		});
 	}
 
+	public updateTranslatedPictogram(pictogram: TranslatedPictogram, language: string) {
+		return this.transaction("rw", this.pictograms, this.translations, () => {
+			this.pictograms.update(pictogram.uuid, pictogram);
+			this.translations.where({ objectUuid: pictogram.uuid, language, key: "word" }).modify({ value: pictogram.word });
+		});
+	}
+
+	public updateTranslatedCategory(category: TranslatedCategory, language: string) {
+		return this.transaction("rw", this.categories, this.translations, () => {
+			this.categories.update(category.uuid, category);
+			this.translations.where({ objectUuid: category.uuid, language, key: "name" }).modify({ value: category.name });
+		});
+	}
+
 	public updateBinder(binder: Binder) {
 		return this.binders.update(binder.uuid, binder);
 	}

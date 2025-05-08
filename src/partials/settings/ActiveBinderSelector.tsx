@@ -50,6 +50,7 @@ export default function ActiveBinderSelector() {
 					</Select.Icon>
 				</Select.Trigger>
 				<Select.Portal>
+					<Select.Backdrop />
 					<Select.Positioner side="bottom" align="start">
 						<Select.Popup className={cn("py-1 rounded-md bg-zinc-200 dark:bg-zinc-800 shadow-lg outline transition-all")}>
 							{binders && binders.map((binder) => (

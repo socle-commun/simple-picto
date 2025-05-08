@@ -27,6 +27,11 @@ export default function BinderEditPage() {
 		[db, t, uuid]
 	);
 
+	const categories = useLiveQuery(
+		async () => (uuid ? db.getTranslatedCategories(uuid) : undefined),
+		[db, t, uuid]
+	);
+
 	return (
 		<SettingCard>
 			<h1 className={cn("mb-4 text-4xl font-bold")}>{binder ? binder.title : ""}</h1>
@@ -88,9 +93,80 @@ export default function BinderEditPage() {
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
 						<div className={cn("grid grid-cols-2 p-2 gap-4")}>
 							{pictograms?.map((pictogram) => (
-								<div>
-									{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[200px]" />}
-									<p className={cn("text-center")}>{pictogram.word}</p>
+								<div key={pictogram.uuid} className={cn("flex flex-col items-center justify-center p-2 border-2 border-zinc-500 rounded-sm")}>
+									{/* Image */}
+									<button
+										onClick={() => {
+											const fileInput = document.createElement("input");
+											fileInput.type = "file";
+											fileInput.accept = "image/*";
+											fileInput.onchange = async (event) => {
+												const file = (event.target as HTMLInputElement).files?.[0];
+												if (file && binder) {
+													const blob = await file.arrayBuffer();
+													pictogram.blob = new Blob([blob], { type: file.type });
+
+													db.updateTranslatedPictogram(pictogram, i18n.language);
+												}
+											};
+											fileInput.click();
+										}}
+										className={cn("px-2 py-1 mt-2 border-2 border-zinc-500 rounded-sm cursor-pointer")}
+									>
+										{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[200px]" />}
+									</button>
+									{/* Word */}
+									<input type="text" value={pictogram.word} placeholder="Enter pictogram word" onChange={(event) => {
+										pictogram.word = event.target.value;
+
+										db.updateTranslatedPictogram(pictogram, i18n.language);
+									}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
+									{/* Category */}
+									<div className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")}>
+										<input
+											type="text"
+											value={categories?.find((category) => category.uuid === pictogram.categoryUuid)?.name ?? ""}
+											onKeyDown={(event) => {
+												if (event.key === "Enter" && binder) {
+													const newCategoryName = event.currentTarget.value.trim();
+													if (newCategoryName) {
+														const existingCategory = categories?.find(
+															(category) => category.name.toLowerCase() === newCategoryName.toLowerCase()
+														);
+
+														if (existingCategory) {
+															pictogram.categoryUuid = existingCategory.uuid;
+														} else {
+															const newCategory = {
+																uuid: crypto.randomUUID(),
+																name: newCategoryName,
+																icon: "category",
+															};
+															pictogram.categoryUuid = newCategory.uuid;
+
+															db.updateTranslatedCategory(newCategory, i18n.language);
+														}
+
+														db.updateTranslatedPictogram(pictogram, i18n.language);
+													}
+												}
+											}}
+											placeholder="Search..."
+										/>
+										{/* {showSuggestions && (
+											<ul className="suggestions">
+												{filteredSuggestions.length > 0 ? (
+													filteredSuggestions.map((suggestion, index) => (
+														<li key={index} onClick={() => handleSelect(suggestion.label)}>
+															{suggestion.label}
+														</li>
+													))
+												) : (
+													<li>No suggestions found</li>
+												)}
+											</ul>
+										)} */}
+									</div>
 								</div>
 							))}
 						</div>
