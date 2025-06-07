@@ -9,6 +9,7 @@ import { Accordion } from '@base-ui-components/react/accordion';
 import { db } from "@/features/persistence/db";
 
 import SettingCard from "@/partials/settings/SettingCard";
+import CategorySelector from "@/partials/settings/CategorySelector";
 
 import { cn } from "@/utilities/cn";
 
@@ -122,51 +123,15 @@ export default function BinderEditPage() {
 										db.updateTranslatedPictogram(pictogram, i18n.language);
 									}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
 									{/* Category */}
-									<div className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")}>
-										<input
-											type="text"
-											value={categories?.find((category) => category.uuid === pictogram.categoryUuid)?.name ?? ""}
-											onKeyDown={(event) => {
-												if (event.key === "Enter" && binder) {
-													const newCategoryName = event.currentTarget.value.trim();
-													if (newCategoryName) {
-														const existingCategory = categories?.find(
-															(category) => category.name.toLowerCase() === newCategoryName.toLowerCase()
-														);
-
-														if (existingCategory) {
-															pictogram.categoryUuid = existingCategory.uuid;
-														} else {
-															const newCategory = {
-																uuid: crypto.randomUUID(),
-																name: newCategoryName,
-																icon: "category",
-															};
-															pictogram.categoryUuid = newCategory.uuid;
-
-															db.updateTranslatedCategory(newCategory, i18n.language);
-														}
-
-														db.updateTranslatedPictogram(pictogram, i18n.language);
-													}
-												}
-											}}
-											placeholder="Search..."
-										/>
-										{/* {showSuggestions && (
-											<ul className="suggestions">
-												{filteredSuggestions.length > 0 ? (
-													filteredSuggestions.map((suggestion, index) => (
-														<li key={index} onClick={() => handleSelect(suggestion.label)}>
-															{suggestion.label}
-														</li>
-													))
-												) : (
-													<li>No suggestions found</li>
-												)}
-											</ul>
-										)} */}
-									</div>
+									<CategorySelector
+										pictogramUuid={pictogram.uuid}
+										currentCategoryUuid={pictogram.categoryUuid}
+										binderUuid={uuid || ""}
+										onChange={(categoryUuid) => {
+											pictogram.categoryUuid = categoryUuid;
+											db.updateTranslatedPictogram(pictogram, i18n.language);
+										}}
+									/>
 								</div>
 							))}
 						</div>
