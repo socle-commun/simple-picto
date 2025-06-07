@@ -14,8 +14,31 @@
 			"by": "by",
 			"new": "New",
 			"edit": "Edit",
-			"delete": "Delete"
+			"delete": "Delete",
+			"save": "Save",
+			"cancel": "Cancel",
+			"categories": "Categories",
+			"addCategory": "Add category",
+			"categoryName": "Category name",
+			"categoryIcon": "Icon (e.g. globe)",
+			"noCategory": "No category",
+			"editCategory": "Edit category",
+			"selectCategory": "Select a category",
+			"add": "Add",
+			"close": "Close",
+			"addPicto": "Add pictogram",
+			"pictoWord": "Pictogram word",
+			"confirmDeletePicto": "Do you really want to delete this pictogram?"
 		}
+	},
+	"errors": {
+		"loadingCategories": "Error loading categories.",
+		"categoryNameRequired": "Category name is required.",
+		"addingCategory": "Error adding category.",
+		"updatingCategory": "Error updating category.",
+		"deletingCategory": "Error deleting category.",
+		"pictoFieldsRequired": "Word and category are required.",
+		"addingPicto": "Error adding pictogram."
 	},
 	"navigation": {
 		"settings": "Settings",

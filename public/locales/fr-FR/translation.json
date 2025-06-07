@@ -14,8 +14,31 @@
 			"by": "par",
 			"new": "Nouveau",
 			"edit": "Modifier",
-			"delete": "Supprimer"
+			"delete": "Supprimer",
+			"save": "Enregistrer",
+			"cancel": "Annuler",
+			"categories": "Catégories",
+			"addCategory": "Ajouter une catégorie",
+			"categoryName": "Nom de la catégorie",
+			"categoryIcon": "Icône (ex: globe)",
+			"noCategory": "Aucune catégorie",
+			"editCategory": "Modifier la catégorie",
+			"selectCategory": "Choisir une catégorie",
+			"add": "Ajouter",
+			"close": "Fermer",
+			"addPicto": "Ajouter un pictogramme",
+			"pictoWord": "Mot du pictogramme",
+			"confirmDeletePicto": "Voulez-vous vraiment supprimer ce pictogramme ?"
 		}
+	},
+	"errors": {
+		"loadingCategories": "Erreur lors du chargement des catégories.",
+		"categoryNameRequired": "Le nom de la catégorie est requis.",
+		"addingCategory": "Erreur lors de l'ajout de la catégorie.",
+		"updatingCategory": "Erreur lors de la modification de la catégorie.",
+		"deletingCategory": "Erreur lors de la suppression de la catégorie.",
+		"pictoFieldsRequired": "Le mot et la catégorie sont requis.",
+		"addingPicto": "Erreur lors de l'ajout du pictogramme."
 	},
 	"navigation": {
 		"settings": "Paramètres",
