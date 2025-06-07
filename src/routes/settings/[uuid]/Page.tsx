@@ -1,4 +1,5 @@
 import { useLiveQuery } from "dexie-react-hooks";
+import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -11,6 +12,7 @@ import { db } from "@/features/persistence/db";
 import SettingCard from "@/partials/settings/SettingCard";
 import CategorySelector from "@/partials/settings/CategorySelector";
 import CategoryListEditor from "@/partials/settings/CategoryListEditor";
+import NewPictoModal from "@/partials/settings/NewPictoModal";
 
 import { cn } from "@/utilities/cn";
 
@@ -19,6 +21,10 @@ export default function BinderEditPage() {
 
 	const { t, i18n } = useTranslation();
 
+	const [showNewPicto, setShowNewPicto] = useState(false);
+	const [pictoRefresh, setPictoRefresh] = useState(0);
+	const [pictoToDelete, setPictoToDelete] = useState<string | null>(null);
+
 	const binder = useLiveQuery(
 		async () => (uuid ? db.getTranslatedBinder(uuid) : undefined),
 		[db, t, uuid]
@@ -26,13 +32,21 @@ export default function BinderEditPage() {
 
 	const pictograms = useLiveQuery(
 		async () => (uuid ? db.getTranslatedPictograms(uuid) : undefined),
-		[db, t, uuid]
+		[db, t, uuid, pictoRefresh]
 	);
 
 	const categories = useLiveQuery(
 		async () => (uuid ? db.getTranslatedCategories(uuid) : undefined),
 		[db, t, uuid]
 	);
+
+	const handleDeletePicto = async () => {
+		if (pictoToDelete) {
+			await db.pictograms.delete(pictoToDelete);
+			setPictoToDelete(null);
+			setPictoRefresh(r => r + 1);
+		}
+	};
 
 	return (
 		<SettingCard>
@@ -88,14 +102,42 @@ export default function BinderEditPage() {
 								image
 							</span>
 							<h2 className={cn("text-2xl font-bold")}>Pictograms</h2>
+							<button type="button" onClick={e => { e.stopPropagation(); setShowNewPicto(true); }} className={cn("ml-2 p-1 rounded bg-sky-500 text-white hover:bg-sky-600 transition-all")}>+</button>
 							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
 							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
+						{showNewPicto && categories && (
+							<NewPictoModal
+								binderUuid={uuid || ""}
+								categories={categories}
+								onClose={() => setShowNewPicto(false)}
+								onCreated={() => setPictoRefresh(r => r + 1)}
+							/>
+						)}
+						{pictoToDelete && (
+							<div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+								<div className="bg-zinc-200 dark:bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col gap-4 max-w-sm w-full">
+									<h2 className="text-xl font-bold">{t("pages.settings.confirmDeletePicto")}</h2>
+									<div className="flex gap-2 justify-end">
+										<button onClick={() => setPictoToDelete(null)} className="bg-gray-400 text-white px-3 py-1 rounded">{t("pages.settings.cancel")}</button>
+										<button onClick={handleDeletePicto} className="bg-red-500 text-white px-3 py-1 rounded">{t("pages.settings.delete")}</button>
+									</div>
+								</div>
+							</div>
+						)}
 						<div className={cn("grid grid-cols-2 p-2 gap-4")}>
 							{pictograms?.map((pictogram) => (
-								<div key={pictogram.uuid} className={cn("flex flex-col items-center justify-center p-2 border-2 border-zinc-500 rounded-sm")}>
+								<div key={pictogram.uuid} className={cn("flex flex-col items-center justify-center p-2 border-2 border-zinc-500 rounded-sm relative")}>
+									<button
+										type="button"
+										onClick={() => setPictoToDelete(pictogram.uuid)}
+										className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 shadow hover:bg-red-600"
+										title={t("pages.settings.delete")}
+									>
+										<span className={cn("icon")}>delete</span>
+									</button>
 									{/* Image */}
 									<button
 										onClick={() => {
@@ -148,9 +190,9 @@ export default function BinderEditPage() {
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
-					<div className={cn("grid p-2")}>
+					
 						<CategoryListEditor binderUuid={uuid || ""} />
-					</div>
+					
 					</Accordion.Panel>
 				</Accordion.Item>
 			</Accordion.Root>
