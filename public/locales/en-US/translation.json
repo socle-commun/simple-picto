@@ -43,6 +43,7 @@
 	"navigation": {
 		"settings": "Settings",
 		"about": "About",
-		"contact": "Contact"
+		"contact": "Contact",
+		"suggestions": "Suggestions"
 	}
 }

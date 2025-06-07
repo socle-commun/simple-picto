@@ -29,8 +29,13 @@ export default function RootLayout() {
 					<Span className={cn("icon")}>settings</Span>
 					<Span>{t("navigation.settings")}</Span>
 				</TopBarNavLink>
+				<li>
+					<a href="mailto:socle-commun@gmail.com" className={cn("flex items-center gap-2 text-center")}>
+						<Span className={cn("icon")}>mail</Span>
+						<Span>{t("navigation.suggestions")}</Span>
+					</a>
+				</li>
 			</ResponsiveTopBar>
-
 
 			<Outlet />
 		</>
