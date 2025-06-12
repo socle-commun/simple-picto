@@ -89,7 +89,7 @@ export default function CategorySelector({
           setShowModal(true); 
           loadCategories();
         }}
-        className={cn("w-full p-2 flex items-center justify-center gap-2 cursor-pointer rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150 bg-zinc-300 dark:bg-zinc-700")}
+        className={cn("px-3 py-2 mt-3 min-w-[180px] flex items-center justify-center gap-2 cursor-pointer rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150 bg-zinc-300 dark:bg-zinc-700")}
       >
         <Span className={cn("icon")}>
           {categories.find(cat => cat.uuid === currentCategoryUuid)?.icon || "category"}
@@ -101,7 +101,7 @@ export default function CategorySelector({
 
       {showModal && (
         <Div className={cn("fixed inset-0 bg-black/50 z-50 flex items-center justify-center")}>
-          <Div className={cn("bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg w-[90%] max-w-md shadow-lg")}>
+          <Div className={cn("flex flex-col bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg w-[90%] max-w-md shadow-lg")}>
             <h2 className={cn("text-2xl font-bold mb-4")}>{t("pages.settings.selectCategory")}</h2>
             
             {error && (
@@ -116,7 +116,7 @@ export default function CategorySelector({
                   key={cat.uuid}
                   onClick={() => handleSelect(cat.uuid)}
                   className={cn(
-                    "border px-3 py-2 rounded-lg flex items-center gap-2 shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150",
+                    "border border-zinc-500 px-2 py-1 rounded-lg flex items-center gap-2 shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150",
                     currentCategoryUuid === cat.uuid
                       ? "bg-sky-500 text-sky-50"
                       : "bg-zinc-300 dark:bg-zinc-700"
@@ -142,20 +142,21 @@ export default function CategorySelector({
                 value={newIcon}
                 onChange={(e) => setNewIcon(e.target.value)}
               />
+            </Div>
+            <Div className="w-full flex justify-between border-t border-zinc-400 dark:border-zinc-600 pt-4 mt-4">
+              <Button
+                onClick={() => setShowModal(false)}
+                className={cn("text-zinc-600 dark:text-zinc-400 underline")}
+              >
+                {t("pages.settings.close")}
+              </Button>
               <Button
                 onClick={handleAddCategory}
-                className={cn("w-full p-2 bg-sky-500 text-sky-50 rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150")}
+                className={cn("p-1 pl-2 pr-2 bg-sky-800 text-sky-50 rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150")}
               >
                 {t("pages.settings.add")}
               </Button>
             </Div>
-
-            <Button
-              onClick={() => setShowModal(false)}
-              className={cn("w-full mt-4 p-2 text-zinc-600 dark:text-zinc-400 underline")}
-            >
-              {t("pages.settings.close")}
-            </Button>
           </Div>
         </Div>
       )}

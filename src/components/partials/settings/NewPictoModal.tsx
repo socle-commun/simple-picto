@@ -68,7 +68,7 @@ export default function NewPictoModal({ binderUuid, categories, onClose, onCreat
 						required
 					>
 						{categories.map(cat => (
-							<option key={cat.uuid} value={cat.uuid}>{cat.name}</option>
+							<option key={cat.uuid} value={cat.uuid} className="text-black">{cat.name}</option>
 						))}
 					</select>
 					<input

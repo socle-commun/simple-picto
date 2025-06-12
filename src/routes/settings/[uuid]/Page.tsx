@@ -11,7 +11,6 @@ import { db } from "@/features/persistence/db";
 
 import SettingCard from "@/components/partials/settings/SettingCard";
 import CategorySelector from "@/components/partials/settings/CategorySelector";
-import CategoryListEditor from "@/components/partials/settings/CategoryListEditor";
 import NewPictoModal from "@/components/partials/settings/NewPictoModal";
 
 import { cn } from "@/utilities/cn";
@@ -102,7 +101,7 @@ export default function BinderEditPage() {
 								image
 							</span>
 							<h2 className={cn("text-2xl font-bold")}>Pictograms</h2>
-							<button type="button" onClick={e => { e.stopPropagation(); setShowNewPicto(true); }} className={cn("ml-2 p-1 rounded bg-sky-500 text-white hover:bg-sky-600 transition-all")}>+</button>
+							<button type="button" onClick={e => { e.stopPropagation(); setShowNewPicto(true); }} className={cn("block ml-3 pl-2 pr-2 rounded bg-sky-800 text-white hover:bg-sky-600 transition-all")}>+</button>
 							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
 							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
 						</Accordion.Trigger>
@@ -127,17 +126,27 @@ export default function BinderEditPage() {
 								</div>
 							</div>
 						)}
-						<div className={cn("grid grid-cols-2 p-2 gap-4")}>
+						<div className={cn("grid grid-cols-3 p-2 gap-4")}>
 							{pictograms?.map((pictogram) => (
-								<div key={pictogram.uuid} className={cn("flex flex-col items-center justify-center p-2 border-2 border-zinc-500 rounded-sm relative")}>
+								<div key={pictogram.uuid} className={cn("flex flex-col justify-center items-center bg-zinc-200 dark:bg-zinc-900 overflow-hidden rounded-lg shadow-md hover:shadow-lg")}>
 									<button
 										type="button"
 										onClick={() => setPictoToDelete(pictogram.uuid)}
-										className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 shadow hover:bg-red-600"
+										className={cn("size-6 flex ml-auto mr-3 mt-3 justify-center items-center bg-red-900 text-white rounded-full shadow hover:bg-red-800")}
 										title={t("pages.settings.delete")}
 									>
-										<span className={cn("icon")}>delete</span>
+										<span className={cn("icon text-sm flex justify-center items-center")}>delete</span>
 									</button>
+									{/* Category */}
+									<CategorySelector
+										pictogramUuid={pictogram.uuid}
+										currentCategoryUuid={pictogram.categoryUuid}
+										binderUuid={uuid || ""}
+										onChange={(categoryUuid) => {
+											pictogram.categoryUuid = categoryUuid;
+											db.updateTranslatedPictogram(pictogram, i18n.language);
+										}}
+									/>
 									{/* Image */}
 									<button
 										onClick={() => {
@@ -155,32 +164,22 @@ export default function BinderEditPage() {
 											};
 											fileInput.click();
 										}}
-										className={cn("px-2 py-1 mt-2 border-2 border-zinc-500 rounded-sm cursor-pointer")}
+										className={cn("px-2 py-1 mt-2 border-zinc-500 rounded-sm cursor-pointer")}
 									>
-										{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[200px]" />}
+										{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[120px]" />}
 									</button>
 									{/* Word */}
 									<input type="text" value={pictogram.word} placeholder="Enter pictogram word" onChange={(event) => {
 										pictogram.word = event.target.value;
 
 										db.updateTranslatedPictogram(pictogram, i18n.language);
-									}} className={cn("px-2 py-1 border-2 border-zinc-500 rounded-sm")} />
-									{/* Category */}
-									<CategorySelector
-										pictogramUuid={pictogram.uuid}
-										currentCategoryUuid={pictogram.categoryUuid}
-										binderUuid={uuid || ""}
-										onChange={(categoryUuid) => {
-											pictogram.categoryUuid = categoryUuid;
-											db.updateTranslatedPictogram(pictogram, i18n.language);
-										}}
-									/>
+									}} className={cn("px-2 mt-2 mb-3 py-1 border-2 border-zinc-500 dark:border-zinc-700 rounded-sm w-[180px]")} />
 								</div>
 							))}
 						</div>
 					</Accordion.Panel>
 				</Accordion.Item>
-				<Accordion.Item id="categories" title="Categories">
+				{/* <Accordion.Item id="categories" title="Categories">
 					<Accordion.Header>
 						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
 							<span className={cn("icon")}>category</span>
@@ -194,7 +193,7 @@ export default function BinderEditPage() {
 						<CategoryListEditor binderUuid={uuid || ""} />
 
 					</Accordion.Panel>
-				</Accordion.Item>
+				</Accordion.Item> */}
 			</Accordion.Root>
 		</SettingCard>
 	);
