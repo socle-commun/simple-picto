@@ -89,9 +89,9 @@ export default function CategorySelector({
           setShowModal(true); 
           loadCategories();
         }}
-        className={cn("px-3 py-2 mt-3 min-w-[180px] flex items-center justify-center gap-2 cursor-pointer rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150 bg-zinc-300 dark:bg-zinc-700")}
+        className={cn("text-sm px-3 ml-3 mt-3 flex items-center justify-center gap-2 cursor-pointer rounded-lg shadow-md hover:shadow-lg hover:scale-105 active:shadow-md active:scale-95 transition-all ease-in-out duration-150 bg-zinc-300 dark:bg-zinc-700")}
       >
-        <Span className={cn("icon")}>
+        <Span className={cn("icon text-xs")}>
           {categories.find(cat => cat.uuid === currentCategoryUuid)?.icon || "category"}
         </Span>
         <Span>

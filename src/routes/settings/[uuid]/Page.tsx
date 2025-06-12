@@ -129,24 +129,27 @@ export default function BinderEditPage() {
 						<div className={cn("grid grid-cols-3 p-2 gap-4")}>
 							{pictograms?.map((pictogram) => (
 								<div key={pictogram.uuid} className={cn("flex flex-col justify-center items-center bg-zinc-200 dark:bg-zinc-900 overflow-hidden rounded-lg shadow-md hover:shadow-lg")}>
-									<button
-										type="button"
-										onClick={() => setPictoToDelete(pictogram.uuid)}
-										className={cn("size-6 flex ml-auto mr-3 mt-3 justify-center items-center bg-red-900 text-white rounded-full shadow hover:bg-red-800")}
-										title={t("pages.settings.delete")}
-									>
-										<span className={cn("icon text-sm flex justify-center items-center")}>delete</span>
-									</button>
-									{/* Category */}
-									<CategorySelector
-										pictogramUuid={pictogram.uuid}
-										currentCategoryUuid={pictogram.categoryUuid}
-										binderUuid={uuid || ""}
-										onChange={(categoryUuid) => {
-											pictogram.categoryUuid = categoryUuid;
-											db.updateTranslatedPictogram(pictogram, i18n.language);
-										}}
-									/>
+									<div className="flex justify-between items-center w-full">
+										{/* Category */}
+										<CategorySelector
+											pictogramUuid={pictogram.uuid}
+											currentCategoryUuid={pictogram.categoryUuid}
+											binderUuid={uuid || ""}
+											onChange={(categoryUuid) => {
+												pictogram.categoryUuid = categoryUuid;
+												db.updateTranslatedPictogram(pictogram, i18n.language);
+											}}
+										/>
+										{ /* Delete button */ }
+										<button
+											type="button"
+											onClick={() => setPictoToDelete(pictogram.uuid)}
+											className={cn("size-6 flex ml-auto mr-3 mt-3 justify-center items-center bg-red-900 text-white rounded-full shadow hover:bg-red-800")}
+											title={t("pages.settings.delete")}
+										>
+											<span className={cn("icon text-sm flex justify-center items-center")}>delete</span>
+										</button>
+									</div>
 									{/* Image */}
 									<button
 										onClick={() => {
@@ -166,14 +169,14 @@ export default function BinderEditPage() {
 										}}
 										className={cn("px-2 py-1 mt-2 border-zinc-500 rounded-sm cursor-pointer")}
 									>
-										{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[120px]" />}
+										{pictogram.blob && <img src={URL.createObjectURL(pictogram.blob)} alt={pictogram.word} className="size-[120px] rounded-sm" />}
 									</button>
 									{/* Word */}
 									<input type="text" value={pictogram.word} placeholder="Enter pictogram word" onChange={(event) => {
 										pictogram.word = event.target.value;
 
 										db.updateTranslatedPictogram(pictogram, i18n.language);
-									}} className={cn("px-2 mt-2 mb-3 py-1 border-2 border-zinc-500 dark:border-zinc-700 rounded-sm w-[180px]")} />
+									}} className={cn("text-center px-2 mt-2 mb-3 py-1 border-b-1 border-zinc-500 dark:border-zinc-700 dark:text-zinc-400 rounded-sm w-[180px]")} />
 								</div>
 							))}
 						</div>
