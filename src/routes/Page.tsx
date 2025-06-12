@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { db } from "@/features/persistence/db";
-import speak from "@/features/tts/speak";
+import speak from "@/utilities/speak";
 
 import Aside from "@/lib/components/aside";
 import Button from "@/lib/components/button";

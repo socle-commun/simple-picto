@@ -10,9 +10,12 @@ hero:
     - theme: brand
       text: Documentation utilisateur
       link: /users
-    - theme: alt
+    - theme: brand
       text: Documentation développeur
       link: /developers
+    - theme: alt
+      text: Specification
+      link: /specification
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

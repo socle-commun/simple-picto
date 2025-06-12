@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import toggleDarkClass from "@/features/theming/toggleDarkClass";
 
-import AppProviders from "@/partials/AppProviders";
+import AppProviders from "@/components/partials/AppProviders";
 
 import RootLayout from "@/routes/Layout";
 import RootError from "@/routes/Error";

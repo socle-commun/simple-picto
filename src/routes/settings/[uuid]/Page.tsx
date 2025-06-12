@@ -9,10 +9,10 @@ import { Accordion } from '@base-ui-components/react/accordion';
 
 import { db } from "@/features/persistence/db";
 
-import SettingCard from "@/partials/settings/SettingCard";
-import CategorySelector from "@/partials/settings/CategorySelector";
-import CategoryListEditor from "@/partials/settings/CategoryListEditor";
-import NewPictoModal from "@/partials/settings/NewPictoModal";
+import SettingCard from "@/components/partials/settings/SettingCard";
+import CategorySelector from "@/components/partials/settings/CategorySelector";
+import CategoryListEditor from "@/components/partials/settings/CategoryListEditor";
+import NewPictoModal from "@/components/partials/settings/NewPictoModal";
 
 import { cn } from "@/utilities/cn";
 
@@ -182,7 +182,7 @@ export default function BinderEditPage() {
 				</Accordion.Item>
 				<Accordion.Item id="categories" title="Categories">
 					<Accordion.Header>
-						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}> 
+						<Accordion.Trigger className={cn("group flex w-full cursor-pointer items-center gap-4 py-2 text-left font-medium")}>
 							<span className={cn("icon")}>category</span>
 							<h2 className={cn("text-2xl font-bold")}>Catégories</h2>
 							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
@@ -190,9 +190,9 @@ export default function BinderEditPage() {
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
-					
+
 						<CategoryListEditor binderUuid={uuid || ""} />
-					
+
 					</Accordion.Panel>
 				</Accordion.Item>
 			</Accordion.Root>

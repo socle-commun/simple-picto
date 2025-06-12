@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 
 import Span from "@/lib/components/span";
 
-import ResponsiveTopBar from "@/components/nav/ResponsiveTopBar";
-import TopBarNavLink from "@/components/nav/TopBarNavLink";
+import ResponsiveTopBar from "@/components/ui/nav/ResponsiveTopBar";
+import TopBarNavLink from "@/components/ui/nav/TopBarNavLink";
 
-import Brand from "@/partials/branding/Brand";
+import Brand from "@/components/partials/branding/Brand";
 
 import { cn } from "@/utilities/cn";
 

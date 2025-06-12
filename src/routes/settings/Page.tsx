@@ -2,14 +2,14 @@ import { useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import LocaleSelector from "@/features/i18n/LocaleSelector";
+import LocaleSelector from "@/i18n/LocaleSelector";
 import ColorModeToggle from "@/features/theming/ColorModeToggle";
 
 import Div from "@/lib/components/div";
 
-import ActiveBinderSelector from "@/partials/settings/ActiveBinderSelector";
-import BindersList from "@/partials/settings/BindersList";
-import SettingCard from "@/partials/settings/SettingCard";
+import ActiveBinderSelector from "@/components/partials/settings/ActiveBinderSelector";
+import BindersList from "@/components/partials/settings/BindersList";
+import SettingCard from "@/components/partials/settings/SettingCard";
 
 import { cn } from "@/utilities/cn";
 

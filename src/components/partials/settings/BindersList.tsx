@@ -10,7 +10,7 @@ import Button from "@/lib/components/button";
 import Div from "@/lib/components/div";
 import Span from "@/lib/components/span";
 
-import BinderCard from "@/partials/settings/BinderCard";
+import BinderCard from "@/components/partials/settings/BinderCard";
 
 import { cn } from "@/utilities/cn";
 
