@@ -101,9 +101,11 @@ export default function BinderEditPage() {
 								image
 							</span>
 							<h2 className={cn("text-2xl font-bold")}>Pictograms</h2>
-							<button type="button" onClick={e => { e.stopPropagation(); setShowNewPicto(true); }} className={cn("block ml-3 pl-2 pr-2 rounded bg-sky-800 text-white hover:bg-sky-600 transition-all")}>+</button>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
-							<span className={cn("icon ml-auto mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
+							<div className="ml-auto flex ">
+								<button type="button" onClick={e => { e.stopPropagation(); setShowNewPicto(true); }} className={cn("block ml-3 pl-2 pr-2 rounded bg-sky-800 text-white hover:bg-sky-600 transition-all")}>+</button>
+								<span className={cn("icon ml-3 mr-2 size-3 shrink-0 block group-data-[panel-open]:hidden")}>keyboard_arrow_down</span>
+								<span className={cn("icon ml-3 mr-2 size-3 shrink-0 hidden group-data-[panel-open]:block")}>keyboard_arrow_up</span>
+							</div>
 						</Accordion.Trigger>
 					</Accordion.Header>
 					<Accordion.Panel className="h-[var(--accordion-panel-height)] py-2 overflow-hidden text-base transition-[height] ease-in-out data-[ending-style]:h-0 data-[starting-style]:h-0">
