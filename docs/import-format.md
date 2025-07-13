@@ -159,9 +159,9 @@ Here's a minimal example file conforming to the schema:
     },
     {
       "objectUuid": "my-unique-binder-id",
-      "language": "fr-FR",
+      "language": "en-GB",
       "key": "title",
-      "value": "Mon Classeur"
+      "value": "My Binder"
     },
     {
       "objectUuid": "my-unique-binder-id",
@@ -171,9 +171,9 @@ Here's a minimal example file conforming to the schema:
     },
     {
       "objectUuid": "my-unique-binder-id",
-      "language": "fr-FR",
+      "language": "en-GB",
       "key": "description",
-      "value": "Description de mon classeur"
+      "value": "My binder description"
     }
   ],
   "categories": [],
