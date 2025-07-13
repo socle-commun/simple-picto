@@ -184,6 +184,47 @@ export class SimplePictoDB extends Dexie {
 	public createTranslation(translation: Translation) {
 		return this.translations.add(translation);
 	}
+
+	public async importBinder(importData: {
+		binder: Binder;
+		translations: Omit<Translation, 'id'>[];
+		categories?: Category[];
+		pictograms?: Pictogram[];
+	}, mode: 'merge' | 'replace' = 'merge') {
+		return this.transaction('rw', this.binders, this.categories, this.pictograms, this.translations, async () => {
+			if (mode === 'replace') {
+				// Clear existing data
+				await this.binders.clear();
+				await this.categories.clear();
+				await this.pictograms.clear();
+				await this.translations.clear();
+			}
+
+			// Import binder
+			await this.binders.add(importData.binder);
+
+			// Import translations
+			for (const translation of importData.translations) {
+				await this.translations.add(translation);
+			}
+
+			// Import categories if provided
+			if (importData.categories) {
+				for (const category of importData.categories) {
+					await this.categories.add(category);
+				}
+			}
+
+			// Import pictograms if provided
+			if (importData.pictograms) {
+				for (const pictogram of importData.pictograms) {
+					await this.pictograms.add(pictogram);
+				}
+			}
+
+			return importData.binder.uuid;
+		});
+	}
 	// #endregion
 
 

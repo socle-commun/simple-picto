@@ -14,7 +14,17 @@
 			"by": "by",
 			"new": "New",
 			"edit": "Edit",
-			"delete": "Delete"
+			"delete": "Delete",
+			"import": "Import",
+			"importBinder": "Import binder",
+			"importSuccess": "Binder imported successfully",
+			"importError": "Import error",
+			"invalidFileFormat": "Invalid file format",
+			"chooseImportMode": "Choose import mode",
+			"merge": "Merge",
+			"replace": "Replace",
+			"mergeDescription": "Add binder content to existing binders",
+			"replaceDescription": "Completely replace existing binders"
 		}
 	},
 	"navigation": {

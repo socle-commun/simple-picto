@@ -14,7 +14,17 @@
 			"by": "par",
 			"new": "Nouveau",
 			"edit": "Modifier",
-			"delete": "Supprimer"
+			"delete": "Supprimer",
+			"import": "Importer",
+			"importBinder": "Importer un classeur",
+			"importSuccess": "Classeur importé avec succès",
+			"importError": "Erreur lors de l'importation",
+			"invalidFileFormat": "Format de fichier invalide",
+			"chooseImportMode": "Choisir le mode d'importation",
+			"merge": "Fusionner",
+			"replace": "Remplacer",
+			"mergeDescription": "Ajouter le contenu du classeur aux classeurs existants",
+			"replaceDescription": "Remplacer complètement les classeurs existants"
 		}
 	},
 	"navigation": {

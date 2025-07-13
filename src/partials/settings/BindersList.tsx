@@ -11,6 +11,7 @@ import Div from "@/lib/components/div";
 import Span from "@/lib/components/span";
 
 import BinderCard from "@/partials/settings/BinderCard";
+import BinderImportButton from "@/partials/settings/BinderImportButton";
 
 import { cn } from "@/utilities/cn";
 
@@ -30,10 +31,13 @@ export default function BindersList() {
 		<>
 			<Div className={cn("mb-2 flex items-center")}>
 				<h2 className={cn("text-2xl font-bold")}>{t("pages.settings.binders")}</h2>
-				<NavLink to="create" className={cn("ml-auto p-2 flex items-center justify-center gap-4 border-2 border-sky-500 text-sky-500 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
-					<Span className={cn("icon")}>add</Span>
-					<Span className={cn("sr-only")}>{t("pages.settings.new")}</Span>
-				</NavLink>
+				<Div className={cn("ml-auto flex gap-2")}>
+					<BinderImportButton onImportComplete={() => window.location.reload()} />
+					<NavLink to="create" className={cn("p-2 flex items-center justify-center gap-4 border-2 border-sky-500 text-sky-500 rounded-md cursor-pointer hover:scale-105 active:scale-95 transition-scale ease-in-out duration-150")}>
+						<Span className={cn("icon")}>add</Span>
+						<Span className={cn("sr-only")}>{t("pages.settings.new")}</Span>
+					</NavLink>
+				</Div>
 			</Div>
 			<hr className={cn("border-zinc-400 dark:border-zinc-600 -mx-4")} />
 			<Div className={cn("mt-4 grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-6")}>
